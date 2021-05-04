@@ -1,0 +1,367 @@
+body{
+    border:0;
+    margin:0px;
+    padding:0;
+    background-image: url("./leaf.jpg");
+    
+}
+
+img{
+    border:0px;
+    width: 100%;
+    height: auto;
+    
+}
+.cover{
+    position:fixed;;
+    height:80px;
+    width:100%;
+    background-color: black;
+    opacity: 0.7;
+}
+nav{
+    
+    position:fixed;
+    width:100%;
+    
+    height:80px;
+    border:0px;
+    display:flex;
+    align-items: center;
+    background-color: black;
+    
+    justify-content: center;
+    font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';
+    
+}
+nav a:nth-child(2){
+    padding-right: 10px;
+}
+nav a:nth-child(1){
+    font-size: 30px;
+    text-decoration: none;
+    font-weight: 800;
+    padding-left: 0px;
+    padding-right:70px;
+    font-family: 'sans-serif';
+    color:white;
+}
+nav input{
+    width:250px;
+    height:35px;
+    padding:10px;
+    
+    background-color: white;
+    font-family: sans-serif;
+    border:0px ;
+    font-size: 13px;
+    
+    
+}
+.sign{
+    height:50px;
+    width:120px;
+    font-weight: 600;
+    font: 400 13.3333px Arial;
+}
+nav button{
+    
+    height:35px;
+    width:50px;
+    border:0px ;
+    color:lawngreen;
+    margin-right:50px;
+    background-color:black;
+    border:1px solid lawngreen;
+}
+.row {
+    padding:20px;
+    box-sizing: border-box;
+    margin:0px;
+}
+.buy{
+    height:35px;
+    width:75px;
+    border:0px ;
+    color:lawngreen;
+    margin-right:50px;
+    background-color:black;
+    margin-bottom:20px;
+}
+.buy:hover{
+    background-color: lawngreen;
+    color:black;
+}
+nav button:hover {
+    background-color: lawngreen;
+    color:black;
+}
+nav a:last-child{
+    font-size: 20px;
+
+    text-decoration: none;
+    font-weight: 800;
+    padding-left: 100px;
+    justify-content: right;
+    color:white;
+}
+img:hover{
+    opacity: 0.5;
+}
+nav a{
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: 800;
+    padding-left: 70px;
+    
+    color:white;
+}
+nav a:hover{
+    color:lawngreen;
+}
+.about{
+    font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';
+    height:500px;
+    background-color: black;
+    color:white;
+}
+.about .des{
+    float:left;
+    width:30%;
+    padding-left:100px;
+    
+    text-align: left;
+    box-sizing:border-box;
+    
+}
+.mov{
+    
+    position:absolute;
+    top:690px;
+}
+
+ .des h2{
+    font-size: 37px;
+    line-height: 50px;
+    border-bottom: 3px solid black;
+    width:210px;
+    padding-bottom:2px;
+    font-weight: 800;
+    font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';
+    color:lawngreen;
+}
+ .des p{
+    line-height: 30px;
+    font-size:20px;
+}
+.about .imag{
+    float:left;
+    width:50%;
+    padding-left:100px;
+    padding-top:200px;
+    box-sizing: border-box;
+    
+    
+}
+
+.onimage .wel{
+    position:absolute;
+    top:180px;
+    left:1050px;
+    font-weight: 1000;
+    font-size:60px;
+    font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';;
+    color:white;
+}
+.onimage .logo{
+    position:absolute;
+    top:260px;
+    left:1170px;
+    
+    font-size:60px;
+    font-weight: 1000;
+    font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';;
+    color:white;
+    
+}
+
+.freq-bought{
+    background-color: white;
+    height:400px;
+    
+}
+.freq-bought h2{
+    font-size: 37px;
+    font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';
+    color:lawngreen;
+    text-align: center;
+    border-bottom: 3px solid black;
+    padding-bottom:2px;
+    width:508px;
+}
+body{
+    border:0;
+    margin:0px;
+    padding:0;
+    
+    
+}
+footer{
+
+    float: left;
+    display:inline-block;
+    width:100%;
+    height:320px;
+    font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';;
+    background-color: rgb(48, 47, 47);
+}
+.detail{
+    color:white;
+    
+    padding-right:120px;
+}
+
+.Contact{
+    float:left;
+    text-align: center;
+    width:33%;
+    color:lawngreen;
+    height:90%;
+}
+.feedback{
+    float:left;
+    height:90%;
+    color:lawngreen;
+    text-align: center;
+    width:33%;
+}
+.social{
+    
+    color:lawngreen;
+    float:left;
+    height:90%;
+
+    text-align: center;
+    width:33%;
+}
+.social a{
+    margin-top:20px;
+    text-decoration: none;
+    color:#818a91;
+    background-color: #eceeefd2;
+    
+    font-size:20px;
+    display:inline-block;
+    
+    width:44px;
+    height:34px;
+    text-align:center;
+    margin-right:8px;
+    border-radius:100%;
+    padding-top:10px;
+    
+    
+
+}
+.social .linkedin:hover{
+    background-color:#007bb6;
+    color:white;
+}
+.social .facebook:hover{
+    background-color:#3b5998;
+    color:white;
+}
+.social .twitter:hover{
+    background-color:#00aced;
+    color:white;
+}
+.social .instagram:hover{
+    background-color: gray;
+    color:white;
+}
+.social .gplus:hover{
+    background-color: red;
+    color:white;
+}
+.copy{
+    height:50px;
+    padding-top:10px;
+    box-sizing: border-box;
+    width:100%;
+    float:left;
+    text-align: center;
+    background-color: black;;
+    color:white;
+    
+}
+
+
+
+.social input[type="submit"]{
+    
+   margin-top:20px;
+    font-weight: 600;
+    padding:10px;
+    height:35px;
+    width:auto;
+    border:0px ;
+    color:lawngreen;
+    margin-top: 5px;;
+    margin-right:50px;
+    background-color:black;
+    
+
+}
+figure{
+    display:inline-block;
+    margin-inline-end: 0px;
+   width:200px;
+   font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';
+}
+.social input[type="text"]{
+    margin-top:20px;
+    width:250px;
+    height:35px;
+    padding:10px;
+    margin-left:30px;
+    background-color: #eceeefc9;
+    font-family: sans-serif;
+    border:0px ;
+    
+}
+.social input[type="text"]:focus{
+    
+    background-color: white;
+    
+    
+}
+.social input[type="submit"]:hover {
+    background-color: lawngreen;
+    color:black;
+}
+textarea{
+    background-color:#eceeefc9;
+}
+textarea:focus{
+    background-color: white;
+}
+.feedback input[type="submit"]{
+     position:relative;
+     top:10px;
+     left:20px;
+    margin-top:20px;
+     font-weight: 600;
+     padding:10px;
+     height:35px;
+     width:auto;
+     border:0px ;
+     color:lawngreen;
+     margin-top: 5px;;
+     margin-right:50px;
+     background-color:black;
+     
+ }
+.feedback input[type="submit"]:hover {
+    background-color: lawngreen;
+    color:black;
+}
