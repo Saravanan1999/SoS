@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<?php include 'db_conn.php'?>
 <html>
     <head>
         <meta charset="utf-8">
@@ -24,51 +24,36 @@
             <a href="#"><i class="fa fa-shopping-cart"></i> Cart</a> 
             <a href="signup.php"><button class="sign">Sign Up</button></a>
             
-        </nav>
-        <center><h2 style="padding-top: 100px;">Tools</h2></center><br><br>
-        <center><h3>Search your product of interest</h3><br>
-        <input type="text" id="" onkeyup="" placeholder="Search"><button  class="buy" type="submit" style="width:70px;height:30px"><i class="fa fa-search"></i></center>
+        </nav><br><br><br>
+        <div class="topnav">
+            <a href="?query=Seeds">Seeds</a>
+            <a href="?query=Fertilizers">Fertilizers</a>
+            <a href="?query=Pesticides">Pesticides</a>
+            <a href="?query=Machinery & Tools">Machinery & Tools</a>
+            <a href="?query=Others">Others</a>
+        </div>
+        <center><h2 style="padding-top: 100px;"><?php echo $_GET['query'] ?></h2></center><br><br>
+       
         <br><br>
         <center>
         <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6">
-               <a href="#"> <img src="assets/images/black.jpg" alt="prod_img"></a>
-                <p>Product information, lorem ipsum attack on titans, want to watch but too addicted</p>
-                <button class="buy">Buy me</button>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <a href="#"> <img src="assets/images/black.jpg" alt="prod_img"></a>
-                <p>Product information, lorem ipsum attack on titans, want to watch but too addicted</p>
-                <button class="buy">Buy me</button>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <a href="#"> <img src="assets/images/black.jpg" alt="prod_img"></a>
-                <p>Product information, lorem ipsum attack on titans, want to watch but too addicted</p>
-                <button class="buy">Buy me</button>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <a href="#"> <img src="assets/images/black.jpg" alt="prod_img"></a>
-                <p>Product information, lorem ipsum attack on titans, want to watch but too addicted</p>
-                <button class="buy">Buy me</button>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <a href="#"> <img src="assets/images/black.jpg" alt="prod_img"></a>
-                <p>Product information, lorem ipsum attack on titans, want to watch but too addicted</p>
-                <button class="buy">Buy me</button>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <a href="#"> <img src="assets/images/black.jpg" alt="prod_img"></a>
-                <p>Product information, lorem ipsum attack on titans, want to watch but too addicted</p>
-                <button class="buy">Buy me</button>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <a href="#"> <img src="assets/images/black.jpg" alt="prod_img"></a>
-                <p>Product information, lorem ipsum attack on titans, want to watch but too addicted</p>
-                <button class="buy">Buy me</button>
-            </div>
+            <?php 
+            $sql = "SELECT * FROM product";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                  echo "<div class='col-lg-3 col-md-4 col-sm-6'>";
+                  echo " <a href='#'><img src=".$row['Image_URL']." alt='prod_img'></a>";
+                  echo "<div class='pro_name'>".$row['Product_Name']."</div>";
+                  echo "<div class='price'>₹".$row['Price']."</div>";
+                  echo "</div>";
+                }
+              } 
+            
+            ?>
         </div>
     </center>
-    <br><br><br>
+    <br><br><br><br>
     <?php include 'footer.php' ?>
     <!--<embed type="text/html" src="footer.html" style="width:100%;height:340px">-->
 
