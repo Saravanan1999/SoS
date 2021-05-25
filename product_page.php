@@ -32,7 +32,13 @@
             <a href="?query=Machinery & Tools">Machinery & Tools</a>
             <a href="?query=Others">Others</a>
         </div>
-        <center><h2 style="padding-top: 100px;"><?php echo $_GET['query'] ?></h2></center><br><br>
+        <center><h2 style="padding-top: 100px;">
+        <?php 
+            if(isset($_GET['query'])){
+                echo $_GET['query'];
+            } 
+        ?>
+        </h2></center><br><br>
        
         <br><br>
         <center>
@@ -43,7 +49,7 @@
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                   echo "<div class='col-lg-3 col-md-4 col-sm-6'>";
-                  echo " <a href='#'><img src=".$row['Image_URL']." alt='prod_img'></a>";
+                  echo " <a href='product_detail.php?id=".$row['Product_ID']."'><img src=".$row['Image_URL']." alt='prod_img' style='height:300px' ></a>";
                   echo "<div class='pro_name'>".$row['Product_Name']."</div>";
                   echo "<div class='price'>₹".$row['Price']."</div>";
                   echo "</div>";

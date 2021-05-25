@@ -22,7 +22,7 @@
             <a href="signup.php"><button class="sign">Sign Up</button></a>
             
         </nav>
-        <img src="assets/images/banner.jpg"/>
+        <img src="assets/images/banner.jpg" style="width:100%"/>
         <div class="onimage">
             <img src="assets/images/leaf.png" class="leaf">
             <p class="wel">Welcome to</p>
