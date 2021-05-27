@@ -8,6 +8,10 @@
             $_SESSION['total']=0;
             $_SESSION['quan']=0;
         }
+        if(isset($_GET['logout'])){
+            session_destroy();
+            header("location: index.php");
+        }
     ?>
         <link rel="stylesheet" type="text/css" href="assets/style/login.css"> 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>

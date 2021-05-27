@@ -7,6 +7,10 @@
             $_SESSION['total']=0;
             $_SESSION['quan']=0;
         }
+        if(isset($_GET['logout'])){
+            session_destroy();
+            header("location: index.php");
+        }
         if(isset($_GET['rem'])){
             if($_GET['rem']==0){
                 array_shift($_SESSION['name']);
