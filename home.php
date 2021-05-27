@@ -1,6 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="assets/style/home.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
@@ -13,6 +14,7 @@
         <div class="cover">
 
         </div>
+        
         <nav>
            
             <a href="#" ><img src="assets/images/logo.jpg" style="height:80px;width:140px"></a>
@@ -23,10 +25,36 @@
             <a href="#">Contact</a>
             
             
-            <a href="#"><i class="fa fa-shopping-cart"></i> Cart</a> 
+            <a href="#" id="cart" style="width:300px;"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">1</span></a> 
+            
             <a href="signup.php"><button class="sign">Sign Up</button></a>
             
         </nav>
+        <div class="container">
+        <div class="shopping-cart">
+                <div class="shopping-cart-header">
+                <i class="fa fa-shopping-cart cart-icon" ></i><span class="badge">1</span>
+                <div class="shopping-cart-total">
+                    <span class="lighter-text">Total:</span>
+                    <span class="main-color-text total">$461.15</span>
+                </div>
+                </div> <!--end shopping-cart-header -->
+
+                <ul class="shopping-cart-items" style="max-height:300px;overflow-y:scroll">
+                <li class="clearfix">
+                    <img src="https://www.qispackaging.com.au/getmetafile/fefe4afb-dd4d-495e-ad59-209f29b47052/XMREDTREE.aspx" alt="item1" />
+                    <span class="item-name">XMREDTREE</span>
+                    <span class="item-detail">Pack 100</span>
+                    <span class="item-price">$49.50</span>
+                    <span class="item-quantity">Quantity: 01</span>
+                </li>
+
+               
+                </ul>
+
+                <a href="#" class="button">Checkout <i class="fa fa-chevron-right"></i></a>
+            </div> <!--end shopping-cart -->
+    </div>
         <img src="assets/images/banner.jpg" style="width:100%"/>
         <div class="onimage">
             <img src="assets/images/leaf.png" class="leaf">
@@ -80,6 +108,37 @@
         <?php include 'footer.php' ?>
         <!--<embed type="text/html" src="footer.html" style="width:100%;height:340px">-->
 
-      
+        <script>
+          (function(){
+            $(document).click(function() {
+                var $item = $(".shopping-cart");
+                if ($item.hasClass("active")) {
+                $item.removeClass("active");
+                }
+            });
+            
+            $('.shopping-cart').each(function() {
+                var delay = $(this).index() * 50 + 'ms';
+                $(this).css({
+                    '-webkit-transition-delay': delay,
+                    '-moz-transition-delay': delay,
+                    '-o-transition-delay': delay,
+                    'transition-delay': delay
+                });
+            });
+            $('#cart').click(function(e) {
+                e.stopPropagation();
+                $(".shopping-cart").toggleClass("active");
+            });
+            
+            $('#addtocart').click(function(e) {
+                e.stopPropagation();
+                $(".shopping-cart").toggleClass("active");
+            });
+
+
+            
+            })();
+      </script>
     </body>
 </html>
