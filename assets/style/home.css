@@ -6,6 +6,7 @@ body{
     
     
 }
+
 img{
     border:0px;
     width: 80%;
@@ -100,8 +101,8 @@ nav a:hover{
 }
 .leaf{
    position:absolute;
-   top:195px;
-   left:1350px;
+   top:165px;
+   left:1390px;
    height:100px;
    width:100px;
    animation-name: leaf;

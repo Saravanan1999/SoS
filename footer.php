@@ -6,7 +6,7 @@
             a:hover{
                 color:lawngreen;
             } 
-            a{
+            footer a{
                 color:white;
                 text-decoration:none;
 
@@ -19,25 +19,25 @@
             <div class="row">
 
                 <div class="col-lg-4 col-sm-6 mb-2 mb-xl-0 single-footer-widget">
-                    <h4>About Us</h4>
-                    <p>At WAaST, provide tools for making work a lot easier and quicker for users and experts</p>
+                    <h4>About Us</h4><br>
+                    <span>consectetur adipiscing elit, sed do</span>
                     <div class="footer-logo">
                        <!-- <img src="/static/img/img.png" alt="">-->
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-sm-6 mb-2 mb-xl-0 single-footer-widget">
-                    <h4>Contact Info</h4>
+                    <h4>Contact Info</h4><br>
                     <div class="footer-address">
-                        <p>Address :
-                            Tiruvalam Rd, Katpadi, Vellore, Tamil Nadu 632014</p>
+                        <span>Address :
+                            Tiruvalam Rd, Katpadi, Vellore, Tamil Nadu 632014</span><br><br>
                         <span>Phone : +8880 44338899</span><br><br>
                         <span>Email : support@sos.com</span>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-sm-6 mb-2 mb-xl-0 single-footer-widget" >
-                    <h4>Important Links</h4>
+                    <h4>Important Links</h4><br>
                     <ul>
                         <li><a href="home.php" >Home</a></li>
                         <li><a href="home.php#about">About</a></li>
