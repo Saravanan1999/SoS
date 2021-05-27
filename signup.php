@@ -53,7 +53,7 @@
                     $arr = $_SESSION['name'];
                     for($i=0;$i<count($arr);$i++){
                         $url = $_SESSION['url'][$i];
-                        echo "<li class='clearfix'>";
+                        echo "<li class='clearfix' id='clrfx' >";
                         echo "<img src = '".$url."' />";
                         echo "<span class='item-name'>".$_SESSION['name'][$i]."</span>";
                         echo " <span class='item-price'>&#8377;".$_SESSION['price'][$i]."</span>";
@@ -124,6 +124,7 @@
         <?php include 'footer.php' ?>
         <!--<embed type="text/html" src="footer.html" style="width:100%;height:340px">-->
         <script>
+          if ($('#clrfx').length > 0){
           (function(){
             $(document).click(function() {
                 var $item = $(".shopping-cart");
@@ -154,6 +155,7 @@
 
             
             })();
+          }
       </script>
       
     </body>
