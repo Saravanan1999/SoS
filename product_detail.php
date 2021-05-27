@@ -3,7 +3,6 @@
 <?php 
     include 'db_conn.php';
     session_start();
-    
     if(!isset($_SESSION['total'])){
         $_SESSION['total']=0;
         $_SESSION['quan']=0;
@@ -33,7 +32,23 @@
     <link rel="stylesheet" href="assets/style/fontawesome.css">
     <link rel="stylesheet" href="assets/style/style.css">
     <link rel="stylesheet" href="assets/style/owl.css">
-
+    <style>
+            .abc{
+                color:black;
+            }
+            .abc:hover{
+                
+                color:lawngreen;
+            }
+            .dropdown{
+                z-index: 999;
+            }
+            .dropdown-menu{
+                top:55px;
+                z-index: 99; 
+                
+            }
+        </style>
   </head>
   <body>
   <?php
@@ -107,7 +122,16 @@
            <a href="#" id="cart" style="width:300px;"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><?php echo $_SESSION['quan'] ?></span></a> 
            <?php 
             if(isset($_SESSION['user'])){
-                echo "<div style='color:white;padding-right:40px;'>".$_SESSION['user']."</div>";
+                echo "<div class='dropdown'>";
+                echo "<button id='dLabel' type='button' data-toggle='dropdown' aria-haspopup='true' onclick='myFunction()' aria-expanded='false' style='margin-right:90px;width:150px;'>".$_SESSION['user']."</button>";
+                echo "<div class='dropdown-menu' id='myDropdown' aria-labelledby='dLabel' style='width:200px;text-align:center'>";
+                echo "<a href='#' style='display:none'></a>";
+                echo "<a class='abc' href='#' style='font-size:15px;width:200px;text-align:center;;overflow:hidden;padding:0px;'>View Orders</a><hr>";
+                echo "<a class='abc' href='#' style='font-size:15px;width:200px;padding:0px;text-align:center;'>Reset Password</a><hr>";
+                echo "<a class='abc' href='index.php?logout=true' style='font-size:15px;width:200px;padding:0px;text-align:center;'>Logout</a>";
+                echo "<a href='#' style='display:none'></a>";
+                echo "</div>";
+                echo "</div>";
             }
             else{
                 echo "<a href='signup.php'><button class='sign'>Sign Up</button></a>";
@@ -115,6 +139,11 @@
             ?>
            
     </nav>
+    <script>
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+        </script>
     <div class="container">
         <div class="shopping-cart">
                 <div class="shopping-cart-header">
@@ -235,10 +264,12 @@
     </div>
     <?php include 'footer.php' ?>
     <script>
-     $(document).ready(function(){
-        $("#exampleModal").modal('show');
-    });
-</script>
+        if($('#no').length > 0){
+            $(document).ready(function(){
+                $("#exampleModal").modal('show');
+            });
+        }
+    </script>
     <script>
         
         if($('#no').length > 0){

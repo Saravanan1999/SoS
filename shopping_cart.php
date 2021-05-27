@@ -69,14 +69,29 @@
             
             <?php 
             if(isset($_SESSION['user'])){
-                echo "<div style='color:white;padding-right:40px;'>".$_SESSION['user']."</div>";
+                echo "<div class='dropdown'>";
+                echo "<button id='dLabel' type='button' data-toggle='dropdown' aria-haspopup='true' onclick='myFunction()' aria-expanded='false' style='margin-right:90px;width:150px;'>".$_SESSION['user']."</button>";
+                echo "<div class='dropdown-menu' id='myDropdown' aria-labelledby='dLabel' style='width:200px;text-align:center'>";
+                echo "<a href='#' style='display:none'></a>";
+                echo "<a class='abc' href='#' style='font-size:15px;width:200px;text-align:center;;overflow:hidden;padding:0px;'>View Orders</a><hr>";
+                echo "<a class='abc' href='#' style='font-size:15px;width:200px;padding:0px;text-align:center;'>Reset Password</a><hr>";
+                echo "<a class='abc' href='index.php?logout=true' style='font-size:15px;width:200px;padding:0px;text-align:center;'>Logout</a>";
+                echo "<a href='#' style='display:none'></a>";
+                echo "</div>";
+                echo "</div>";
             }
             else{
                 echo "<a href='signup.php'><button class='sign'>Sign Up</button></a>";
             }
             ?>
             
-        </nav><br><br><br><br>
+        </nav>
+        <script>
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+        </script>
+        <br><br><br><br>
         <div class="container">
         <div class="shopping-cart">
                 <div class="shopping-cart-header">

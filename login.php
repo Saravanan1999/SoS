@@ -18,6 +18,18 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
         <style>
+            .abc{
+                color:black;
+            }
+            .abc:hover{
+                
+                color:lawngreen;
+            }
+            .dropdown{
+                z-index: 999;
+            }
+        </style>
+        <style>
             form a{
                 color:black;
                 text-decoration:none;
@@ -52,7 +64,7 @@
             
         </div>
         <nav>
-           
+        
           <a href="index.php" ><img src="assets/images/logo.jpg" style="height:80px;width:140px"></a>
             <input type="search" placeholder="Enter product"><button type="submit"><i class="fa fa-search"></i></button>
             <a href="index.php">Home</a>
@@ -64,7 +76,16 @@
             <a href="#" id="cart" style="width:300px;"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><?php echo $_SESSION['quan'] ?></span></a> 
             <?php 
             if(isset($_SESSION['user'])){
-                echo "<div style='color:white;padding-right:40px;'>".$_SESSION['user']."</div>";
+                echo "<div class='dropdown'>";
+                echo "<button id='dLabel' type='button' data-toggle='dropdown' aria-haspopup='true' onclick='myFunction()' aria-expanded='false' style='margin-right:90px;width:150px;'>".$_SESSION['user']."</button>";
+                echo "<div class='dropdown-menu' id='myDropdown' aria-labelledby='dLabel' style='width:200px;text-align:center'>";
+                echo "<a href='#' style='display:none'></a>";
+                echo "<a class='abc' href='#' style='font-size:15px;width:200px;text-align:center;;overflow:hidden;padding:0px;'>View Orders</a><hr>";
+                echo "<a class='abc' href='#' style='font-size:15px;width:200px;padding:0px;text-align:center;'>Reset Password</a><hr>";
+                echo "<a class='abc' href='index.php?logout=true' style='font-size:15px;width:200px;padding:0px;text-align:center;'>Logout</a>";
+                echo "<a href='#' style='display:none'></a>";
+                echo "</div>";
+                echo "</div>";
             }
             else{
                 echo "<a href='signup.php'><button class='sign'>Sign Up</button></a>";
@@ -72,6 +93,11 @@
             ?>
             
         </nav>
+        <script>
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+        </script>
         <div class="container">
         <div class="shopping-cart">
                 <div class="shopping-cart-header">
@@ -166,5 +192,6 @@
         }
       </script>
       
+
     </body>
 </html>
