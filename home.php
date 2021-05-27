@@ -1,4 +1,13 @@
 <html>
+    <?php 
+        include 'db_conn.php';
+        session_start();
+        
+        if(!isset($_SESSION['total'])){
+            $_SESSION['total']=0;
+            $_SESSION['quan']=0;
+        }
+    ?>
     <head>
         <link rel="stylesheet" type="text/css" href="assets/style/home.css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -25,7 +34,7 @@
             <a href="#">Contact</a>
             
             
-            <a href="#" id="cart" style="width:300px;"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">1</span></a> 
+            <a href="#" id="cart" style="width:300px;"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><?php echo $_SESSION['quan'] ?></span></a> 
             
             <a href="signup.php"><button class="sign">Sign Up</button></a>
             
@@ -33,28 +42,37 @@
         <div class="container">
         <div class="shopping-cart">
                 <div class="shopping-cart-header">
-                <i class="fa fa-shopping-cart cart-icon" ></i><span class="badge">1</span>
+                <i class="fa fa-shopping-cart cart-icon" ></i><span class="badge"><?php echo $_SESSION['quan'] ?></span>
                 <div class="shopping-cart-total">
                     <span class="lighter-text">Total:</span>
-                    <span class="main-color-text total">$461.15</span>
+                    <span class="main-color-text total">&#8377;<?php echo $_SESSION['total']; ?></span>
                 </div>
                 </div> <!--end shopping-cart-header -->
 
                 <ul class="shopping-cart-items" style="max-height:300px;overflow-y:scroll">
-                <li class="clearfix">
-                    <img src="https://www.qispackaging.com.au/getmetafile/fefe4afb-dd4d-495e-ad59-209f29b47052/XMREDTREE.aspx" alt="item1" />
-                    <span class="item-name">XMREDTREE</span>
-                    <span class="item-detail">Pack 100</span>
-                    <span class="item-price">$49.50</span>
-                    <span class="item-quantity">Quantity: 01</span>
-                </li>
-
+                <?php 
+                    $arr = $_SESSION['name'];
+                    for($i=0;$i<count($arr);$i++){
+                        $url = $_SESSION['url'][$i];
+                        echo "<li class='clearfix'>";
+                        echo "<img src = '".$url."' />";
+                        echo "<span class='item-name'>".$_SESSION['name'][$i]."</span>";
+                        echo " <span class='item-price'>&#8377;".$_SESSION['price'][$i]."</span>";
+                        echo "<span class='item-quantity'>Quantity:".$_SESSION['quantity'][$i]."</span>";
+                        //echo "<button class='item-detail' style='background-color:red;width:20px;' >Remove<i class='fa fa-remove'></i></button>";
+                        echo "</li>";
+                    }
+                    
+                ?>
+               
+                    
+                
                
                 </ul>
 
                 <a href="#" class="button">Checkout <i class="fa fa-chevron-right"></i></a>
             </div> <!--end shopping-cart -->
-    </div>
+        </div>
         <img src="assets/images/banner.jpg" style="width:100%"/>
         <div class="onimage">
             <img src="assets/images/leaf.png" class="leaf">

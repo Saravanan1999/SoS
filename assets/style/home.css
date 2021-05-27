@@ -471,7 +471,7 @@ body {
 .shopping-cart {
     z-index: 999;
 	background: white;
-	width: 320px;
+	width: 400px;
 	position: absolute;
 	top: 80px;
 	left: 1000px;
