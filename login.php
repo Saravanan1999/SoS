@@ -25,7 +25,29 @@
         </style>
     </head>
     <body>
-        
+    <?php
+        if(isset($_POST['submit'])){
+            $username = $_POST['uname'];
+            $password = $_POST['psw'];
+            $password = hash('sha512',$password);
+            $sql = "Select * from users where username='".$username."';";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                if($row['password']===$password){
+                    $_SESSION['user']=$username;
+                    echo "<h3 style='position:relative;top:550px;left:640px'>Login Successful</h3><br>";
+                }
+                else{
+                    echo "<h3 style='color:red;position:relative;top:550px;left:640px'>Wrong Password</h3><br>";
+                }
+            }
+            else{
+                echo "<h3 style='color:red;position:relative;top:550px;left:590px'>Username does not exist</h3><br>";
+            }
+            header("location: index.php");
+        }
+    ?>
         <div class="cover">
             
         </div>
@@ -104,28 +126,7 @@
  
     </form>
     <div >
-    <?php
-        if(isset($_POST['submit'])){
-            $username = $_POST['uname'];
-            $password = $_POST['psw'];
-            $password = hash('sha512',$password);
-            $sql = "Select * from users where username='".$username."';";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                if($row['password']===$password){
-                    $_SESSION['user']=$username;
-                    echo "<h3 style='position:relative;left:640px'>Login Successful</h3>";
-                }
-                else{
-                    echo "<h3 style='color:red;position:relative;left:640px'>Wrong Password</h3>";
-                }
-            }
-            else{
-                echo "<h3 style='color:red;position:relative;left:590px'>Username does not exist</h3>";
-            }
-        }
-    ?>
+    
     </div><br>
 </main>
     <?php include 'footer.php' ?>

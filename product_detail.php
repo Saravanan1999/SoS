@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="assets/style/owl.css">
 
   </head>
+  <body>
   <?php
         $sql = "SELECT * FROM product where Product_ID='".$_GET['id']."';";
         $result = $conn->query($sql);
@@ -51,45 +52,49 @@
         } 
     ?>
   <?php
-    
-    if(isset($_POST['submit'])){
-    $quantity = $_POST['quan'];
-    if($_SESSION['total']==0){
-        $_SESSION['name']=array();
-        array_push($_SESSION['name'],$Product_Name);
-        $_SESSION['quantity']=array();
-        array_push($_SESSION['quantity'],$quantity);
-        $_SESSION['url']=array();
-        array_push($_SESSION['url'],$row['Image_URL']);
-        $_SESSION['price']=array();
-        array_push($_SESSION['price'],$Price);
-        $_SESSION['total']=$Price*$quantity;
-        $_SESSION['quan']=$quantity;
-    }
-    else{
-        $arr = $_SESSION['name'];
-        
-        if(in_array($Product_Name, $arr)){
-            $id = array_search($Product_Name,$arr);
-           
-            $_SESSION['quantity'][$id]+=$quantity;
-            $_SESSION['total']+=$Price*$quantity;
-            $_SESSION['quan']+=$quantity;
+    if(isset($_SESSION['user'])){
+        if(isset($_POST['submit'])){
+        $quantity = $_POST['quan'];
+        if($_SESSION['total']==0){
+            $_SESSION['name']=array();
+            array_push($_SESSION['name'],$Product_Name);
+            $_SESSION['quantity']=array();
+            array_push($_SESSION['quantity'],$quantity);
+            $_SESSION['url']=array();
+            array_push($_SESSION['url'],$row['Image_URL']);
+            $_SESSION['price']=array();
+            array_push($_SESSION['price'],$Price);
+            $_SESSION['total']=$Price*$quantity;
+            $_SESSION['quan']=$quantity;
         }
         else{
-            array_push($_SESSION['name'],$Product_Name);
-            array_push($_SESSION['quantity'],$quantity);
-            array_push($_SESSION['url'],$row['Image_URL']);
-            array_push($_SESSION['price'],$Price);
-            $_SESSION['total']+=$Price*$quantity;
-            $_SESSION['quan']+=$quantity;
+            $arr = $_SESSION['name'];
+            
+            if(in_array($Product_Name, $arr)){
+                $id = array_search($Product_Name,$arr);
+            
+                $_SESSION['quantity'][$id]+=$quantity;
+                $_SESSION['total']+=$Price*$quantity;
+                $_SESSION['quan']+=$quantity;
+            }
+            else{
+                array_push($_SESSION['name'],$Product_Name);
+                array_push($_SESSION['quantity'],$quantity);
+                array_push($_SESSION['url'],$row['Image_URL']);
+                array_push($_SESSION['price'],$Price);
+                $_SESSION['total']+=$Price*$quantity;
+                $_SESSION['quan']+=$quantity;
+            }
+        }
+        
         }
     }
-    
-}
+    else{
+        echo "<div id='no' style='display:none'>true</div>";
+    }
 
 ?>
-  <body>
+
     <nav>
            
            <a href="index.php" ><img src="assets/images/logo.jpg" style="height:80px;width:140px;"></a>
@@ -198,19 +203,53 @@
                         </div>
 
                         <div class="col-sm-6">
-                          <button name="submit" href="#" class="btn btn-primary btn-block">Add to Cart</button>
+                          <button name="submit" id='tocart' class="btn btn-primary btn-block" >Add to Cart</button>
                         </div>
                     </div>
                     </div>
                 </div>
                 </form>
-                
+               
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Buy Products</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            To buy products, please log in or Sign Up. 
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            
+                        </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             </div>
         </div>
     </div>
     <?php include 'footer.php' ?>
     <script>
+     $(document).ready(function(){
+        $("#exampleModal").modal('show');
+    });
+</script>
+    <script>
+        
+        if($('#no').length > 0){
+            document.getElementById("tocart").disabled = true;
+           
+        }
+        else{
+            document.getElementById("checkout").disabled = false;
+        }
+        
+        
         if ($('#clrfx').length > 0){
           (function(){
             
@@ -246,8 +285,8 @@
         window.history.replaceState( null, null, window.location.href );
     }
     </script>-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/vendor/jquery/jquery.min.js"></script>
+    <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
     <!-- Additional Scripts -->
