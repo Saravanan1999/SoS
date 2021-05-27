@@ -7,6 +7,26 @@
             $_SESSION['total']=0;
             $_SESSION['quan']=0;
         }
+        if(isset($_GET['rem'])){
+            if($_GET['rem']==0){
+                array_shift($_SESSION['name']);
+                array_shift($_SESSION['price']);
+                array_shift($_SESSION['quantity']);
+                array_shift($_SESSION['url']);
+            }
+            else{
+                array_splice($_SESSION['name'], $_GET['rem'], $_GET['rem']); 
+                array_splice($_SESSION['price'], $_GET['rem'], $_GET['rem']); 
+                array_splice($_SESSION['quantity'], $_GET['rem'], $_GET['rem']); 
+                array_splice($_SESSION['url'], $_GET['rem'], $_GET['rem']); 
+            }
+            $_SESSION['total']=0;
+            $_SESSION['quan']=0;
+            for($i=0;$i<count($_SESSION['name']);$i++){
+                $_SESSION['total']+=$_SESSION['price'][$i]*$_SESSION['quantity'][$i];
+                $_SESSION['quan']+=$_SESSION['quantity'][$i];
+            }
+        }
         if(isset($_GET['qua'])){
             $_SESSION['quantity'][$_GET['pos']]=$_GET['qua'];
             $_SESSION['total']=0;
@@ -16,6 +36,7 @@
                 $_SESSION['quan']+=$_SESSION['quantity'][$i];
             }
         }
+        
     ?>
     <head>
         <link rel="stylesheet" href="assets/style/shop.css">
@@ -95,9 +116,10 @@
                             <div class="col align-self-center text-right text-muted"><?php echo $_SESSION['quan'] ?> items</div>
                         </div>
                     </div>
+                    <div id="something">
                     <?php 
                         for($i=0;$i<count($_SESSION['name']);$i++){
-                            echo "<div class='row border-top border-bottom'>";
+                            echo "<div class='row border-top border-bottom' id='rowbr'>";
                             echo "<div class='row main align-items-center'>";
                             echo "<div class='col-2'><img class='img-fluid' src='".$_SESSION['url'][$i]."' style='height:50px;width:auto;';></div>";
                             echo "<div class='col'>";
@@ -105,12 +127,24 @@
                             echo "<div class='row'>".$_SESSION['name'][$i]."</div>";
                             echo "</div>";
                             echo "<div class='col'> <a href='#' onclick='decrease(".$i.")' >-</a><a href='#' class='border'>".$_SESSION['quantity'][$i]."</a><a href='#' onclick='increase(".$i.")'>+</a> </div>";
-                            echo "<div class='col'>&#8377;".$_SESSION['price'][$i]."<span class='close'>&#10005;".$_SESSION['quantity'][$i]."</span></div>";
+                            echo "<div class='col'>&#8377;".$_SESSION['price'][$i]."<a href='#'><span class='close' id='remove' onclick='rem(".$i.")' style='margin-left:50px'>&#10005;</span></a></div>";
                             echo "</div>";
                             echo "</div>";
                         }
                     ?>
+                    </div>
                     <script>
+                        
+                        if ($('#rowbr').length > 0) {
+            
+                        }
+                        else{
+                            document.getElementById('something').innerHTML='<center><h3>Your cart is empty :(</h3></center>';
+                            document.getElementById("checkout").disabled = true;
+                        }
+                        function rem(a){
+                            window.location.href="shopping_cart.php?rem="+a.toString();
+                        }
                         function decrease(a){
                             var val = document.querySelectorAll(".border");
                             var x, i;
@@ -149,7 +183,7 @@
 
                         }
                     </script>
-                    <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+                    <div class="back-to-shop"><a href="product_page.php?query=All">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
                 </div>
                 <div class="col-md-4 summary">
                     <div>
@@ -179,8 +213,17 @@
                     <div class="col">TOTAL PRICE</div>
                     <div id="hid" style="display:none"><?php echo $_SESSION['total']?> </div>
                     <div class="col text-right" id="tot"></div>
-                    </div> <button class="btn btn-primary btn-block">CHECKOUT</button>
-                
+                    </div> <button class="btn btn-primary btn-block" id="checkout">CHECKOUT</button>
+                    <script>
+                        
+                        if ($('#rowbr').length > 0){
+                            document.getElementById("checkout").disabled = false;
+                        }
+                        else{
+                            
+                            document.getElementById("checkout").disabled = true;
+                        }
+                    </script>
                 </div>
             </div>
         </div>
