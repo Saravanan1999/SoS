@@ -29,6 +29,24 @@ nav{
     font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';
     
 }
+footer{
+    background-color: rgb(2, 12, 2);
+    color:white;
+}
+
+.footer-area {
+    padding: 60px 0px;
+}
+
+a {
+    
+    text-decoration: none;
+    
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
 nav a:nth-child(2){
     padding-right: 100px;
 }

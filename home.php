@@ -2,6 +2,11 @@
     <head>
         <link rel="stylesheet" type="text/css" href="assets/style/home.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+        
     </head>
     <body>
         
@@ -33,7 +38,7 @@
 
         </div>
         <div class="about">
-            <div class="des">
+            <div class="des"><br><br>
             <h2>About Shades of spade</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
             </div>
@@ -43,8 +48,8 @@
         </div>
         <center>
         <div class="freq-bought">
-            
-            <h2>Frequently bought products:</h2>
+            <br>
+            <h2>Frequently bought products:</h2><br>
             <figure>
             <a href="#"><img src="assets/images/black.jpg" style="width:200px;"></a>
             <figcaption>consectetur adipiscing elit, sed do eiusmod tempor incididunt<br><br>
@@ -71,7 +76,7 @@
             </figure>
             
             
-        </div></center>
+        </div></center><br><br><br>
         <?php include 'footer.php' ?>
         <!--<embed type="text/html" src="footer.html" style="width:100%;height:340px">-->
 

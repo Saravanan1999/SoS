@@ -1,45 +1,67 @@
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="assets/style/home.css">
+        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
-    <footer>
-        <div class="Contact">
-            <h3>Get in Touch</h3>
-            <i class="fa fa-map-marker"></i>&nbsp;
-            <span class="detail">xxxxx,xxxxxxxxx, xxxxxxxx,xxxxxxxx,<br>  xxxxxxxxx xxxxxx</span><br><br>
-            <i class="fa fa-phone" ></i>&nbsp;
-            <span class="detail">+91-123456789</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
-            <i class="fa fa-envelope"></i>&nbsp;
-            <span class="detail">support@logo.com</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <style>
+            a:hover{
+                color:lawngreen;
+            } 
+            a{
+                color:white;
+                text-decoration:none;
 
-        </div>
-        <div class="feedback">
-            <h3>Leave us your feedback</h3>
-            <textarea rows=8 cols=50></textarea><br>
-            <input type="submit">
-        </div>
-        <div class="social">
-            <div class="subs">
-                <h3>Connect With Us</h3>
-                <form>
-                    <input type="text" placeholder="Your Email Address">
-                    <input type="submit" value="Subscribe">
-                </form>
+            }   
+            
+        </style>
+    </head>
+    <footer class="footer-area"><br>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-4 col-sm-6 mb-2 mb-xl-0 single-footer-widget">
+                    <h4>About Us</h4>
+                    <p>At WAaST, provide tools for making work a lot easier and quicker for users and experts</p>
+                    <div class="footer-logo">
+                       <!-- <img src="/static/img/img.png" alt="">-->
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-sm-6 mb-2 mb-xl-0 single-footer-widget">
+                    <h4>Contact Info</h4>
+                    <div class="footer-address">
+                        <p>Address :
+                            Tiruvalam Rd, Katpadi, Vellore, Tamil Nadu 632014</p>
+                        <span>Phone : +8880 44338899</span><br><br>
+                        <span>Email : support@sos.com</span>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-sm-6 mb-2 mb-xl-0 single-footer-widget" >
+                    <h4>Important Links</h4>
+                    <ul>
+                        <li><a href="home.php" >Home</a></li>
+                        <li><a href="home.php#about">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="product_page.php">Products</a></li>
+                        
+                    </ul>
+                </div>
+
+                
             </div>
-            
-            <a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-            <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
-            <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
-            <a class="instagram" href="#"><i class="fa fa-instagram"></i></a>
-            <a class="gplus" href="#"><i class="fa fa-google-plus"></i></a>
-            
         </div>
-        <div class="copy">
-            
-            
-            Copyright &copy; 2021 All Rights Reserved by <span style="color:lawngreen">Shades of spade</span>
-            
+        <br>
+        <div class="footer-bottom row align-items-center text-center text-lg-left no-gutters">
+            <p class="footer-text m-0 col-lg-12 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --><br>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | A work by <a href="#" style="color:white">Saravanan,Sukant and Vigneshwaran</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+            <div class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
+                <a href="#"><i class="ti-facebook"></i></a>
+                <a href="#"><i class="ti-twitter-alt"></i></a>
+                <a href="#"><i class="ti-dribbble"></i></a>
+                <a href="#"><i class="ti-linkedin"></i></a>
+            </div>
         </div>
-    </footer>
+    </div><br>
+</footer>
 </html>

@@ -1,3 +1,4 @@
+
 body{
     border:0;
     margin:0px;
@@ -31,7 +32,7 @@ nav{
     align-items: center;
     
     justify-content: center;
-    font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';
+    font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';;
     
 }
 nav a:nth-child(2){
@@ -52,7 +53,7 @@ nav input{
     padding:10px;
     
     background-color: white;
-    font-family: sans-serif;
+    font-family:'sans-serif';
     border:0px ;
     
     
@@ -117,7 +118,7 @@ nav a:hover{
 }
 .about{
     z-index: 1;
-    font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';
+    font-family: "Poppins", sans-serif;
     height:500px;
     background-color: black;
     color:white;
@@ -145,7 +146,7 @@ nav a:hover{
     width:500px;
     padding-bottom:2px;
     font-weight: 800;
-    font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';
+    font-family: "Poppins", sans-serif;
     color:lawngreen;
 }
  .des p{
@@ -206,27 +207,37 @@ nav a:hover{
 }
 .freq-bought h2{
     font-size: 37px;
-    font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';
+    
     color:lawngreen;
     text-align: center;
     border-bottom: 3px solid black;
     padding-bottom:2px;
     width:508px;
 }
-body{
-    border:0;
-    margin:0px;
-    padding:0;
-    
-    
+body {
+    line-height: 24px;
+    font-size: 14px;
+    font-family: "Poppins", sans-serif;
+    font-weight: normal;
+    color: #7f7f7f;
 }
 footer{
-    float:left;
-    display:inline-block;
-    width:100%;
-    height:320px;
-    font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';;
-    background-color: rgb(48, 47, 47);
+    background-color: rgb(2, 12, 2);
+    color:white;
+}
+
+.footer-area {
+    padding: 60px 0px;
+}
+
+a {
+    
+    text-decoration: none;
+    
+}
+ul {
+    list-style: none;
+    padding: 0;
 }
 .detail{
     color:white;
@@ -329,7 +340,7 @@ figure{
     display:inline-block;
     margin-inline-end: 0px;
    width:200px;
-   font-family: 'Comic Sans MS', 'Comic Sans', 'cursive';
+   font-family: "Poppins", sans-serif;
 }
 figure a:hover{
     opacity: 0.9;
@@ -401,4 +412,6 @@ figure button:hover{
     background-color: lawngreen;
 }
 
-
+a:hover{
+    color:lawngreen;
+}
