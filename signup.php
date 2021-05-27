@@ -69,7 +69,7 @@
                
                 </ul>
 
-                <a href="#" class="button">Checkout <i class="fa fa-chevron-right"></i></a>
+                <a href="shopping_cart.php" class="button">Checkout <i class="fa fa-chevron-right"></i></a>
             </div> <!--end shopping-cart -->
         </div>
 <main >
