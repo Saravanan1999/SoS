@@ -92,10 +92,10 @@
   <body>
     <nav>
            
-           <a href="#" ><img src="assets/images/logo.jpg" style="height:80px;width:140px;"></a>
+           <a href="index.php" ><img src="assets/images/logo.jpg" style="height:80px;width:140px;"></a>
            <input type="search" placeholder="Enter product"><button type="submit"><i class="fa fa-search"></i></button> 
-           <a href="home.php">Home</a>
-           <a href="home.php#about">About</a>
+           <a href="index.php">Home</a>
+           <a href="index.php#about">About</a>
            <a href="#"><u>Products</u></a>
            <a href="#">Contact</a>            
            

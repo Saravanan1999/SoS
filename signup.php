@@ -26,10 +26,10 @@
         </div>
         <nav>
            
-          <a href="home.html" ><img src="assets/images/logo.jpg" style="height:80px;width:140px"></a>
+          <a href="index.php" ><img src="assets/images/logo.jpg" style="height:80px;width:140px"></a>
             <input type="search" placeholder="Enter product"><button type="submit"><i class="fa fa-search"></i></button>
-            <a href="home.php">Home</a>
-            <a href="home.php#about">About</a>
+            <a href="index.php">Home</a>
+            <a href="index.php#about">About</a>
             <a href="product_page.php">Products</a>
             <a href="#">Contact</a>
             
@@ -73,7 +73,7 @@
             </div> <!--end shopping-cart -->
         </div>
 <main >
-  <form action="" >
+  <form action="" method="post">
   <div class="logincontainer">
     <h1>Sign Up</h1>
     <p>Please fill in this form to create an account.</p>
@@ -92,9 +92,9 @@
 
     
     <label for="number"><b>Mobile Number</b></label><br>
-    <input type="tel" placeholder="Mobile Number" name="psw-repeat" pattern="\d*" minlength="10" maxlength="10" required><br>
+    <input type="tel" placeholder="Mobile Number" name="tel" pattern="\d*" minlength="10" maxlength="10" required><br>
     <label for="country"><b>Country</b></label><br>
-    <select style="height:50px;">
+    <select style="height:50px;" name='country'>
       <option value="Australia">Australia</option>
       <option value="Brazil">Brazil</option>
       <option value="Canada">Canada</option>
@@ -111,14 +111,45 @@
       <option value="United Kingdom">United Kingdom</option>
       <option value="United States">United States</option>
     </select>
- 
-      
-    <div class="clearfix">
-      <input type="submit" value="Sign Up">
+    
+    <div class="clearfix" ><br>
+      <input type="submit" name='submit' value="Sign Up" style="height:45px;">
     </div>
   </div>
 </form>
-
+<div style="position:absolute;top:870px;left:590px;">
+<?php
+  if(isset($_POST['submit'])){
+    $email = $_POST['email'];
+    $mobile = $_POST['tel'];
+    $username = $_POST['username'];
+    $country = $_POST['country'];
+    $password = $_POST['psw'];
+    $retype = $_POST['psw-repeat'];
+    $sql = "Select * from users where username='".$username."';";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+      echo "<h3 style='color:red'>Username already exists</h3>";
+    }
+    else{
+      if($password == $retype){
+        $password = hash('sha512',$password);
+        $sql = "INSERT INTO `users`(`username`, `email`, `password`, `mobile`, `country`) VALUES ('$username','$email','$password','$mobile','$country');";
+        
+        if ($conn->query($sql) == TRUE or die(mysqli_error($conn))) {
+          echo "<h3>Registration Successful!!</h3>";
+        } 
+        else{
+          echo "<h3 style='color:red'>Registration failed</h3>";
+        }
+      }
+      else{
+        echo "<h3 style='color:red'>Registration failed</h3>";
+      }
+    }
+  }
+?>
+</div>
 </main>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <?php include 'footer.php' ?>

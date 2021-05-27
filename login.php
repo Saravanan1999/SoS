@@ -31,10 +31,10 @@
         </div>
         <nav>
            
-          <a href="home.php" ><img src="assets/images/logo.jpg" style="height:80px;width:140px"></a>
+          <a href="index.php" ><img src="assets/images/logo.jpg" style="height:80px;width:140px"></a>
             <input type="search" placeholder="Enter product"><button type="submit"><i class="fa fa-search"></i></button>
-            <a href="home.php">Home</a>
-            <a href="home.php#about">About</a>
+            <a href="index.php">Home</a>
+            <a href="index.php#about">About</a>
             <a href="product_page.php">Products</a>
             <a href="#">Contact</a>
             
@@ -78,7 +78,7 @@
             </div> <!--end shopping-cart -->
         </div>
   <main>
-  <form  action="">
+  <form  action="" method="post">
     
     <div class="logincontainer">
         <h1>Log In</h1>
