@@ -31,7 +31,14 @@
             <a href="#">Contact</a>            
             
             <a href="#" id="cart" style="width:300px;"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><?php echo $_SESSION['quan'] ?></span></a> 
-            <a href="signup.php"><button class="sign">Sign Up</button></a>
+            <?php 
+            if(isset($_SESSION['user'])){
+                echo "<div style='color:white;padding-right:40px;'>".$_SESSION['user']."</div>";
+            }
+            else{
+                echo "<a href='signup.php'><button class='sign'>Sign Up</button></a>";
+            }
+            ?>
             
         </nav>
         

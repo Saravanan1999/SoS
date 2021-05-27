@@ -40,7 +40,14 @@
             
             
             <a href="#" id="cart" style="width:300px;"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><?php echo $_SESSION['quan'] ?></span></a> 
-            <a href="signup.php"><button class="sign">Sign Up</button></a>
+            <?php 
+            if(isset($_SESSION['user'])){
+                echo "<div style='color:white;padding-right:40px;'>".$_SESSION['user']."</div>";
+            }
+            else{
+                echo "<a href='signup.php'><button class='sign'>Sign Up</button></a>";
+            }
+            ?>
             
         </nav>
         <div class="container">
@@ -88,7 +95,7 @@
         <input type="text" placeholder="Enter Username" name="uname" required><br>
         <label for="psw"><b>Password</b></label><br>
         <input type="password" placeholder="Enter Password" name="psw" required><br>
-        <input type="submit" value="Log In"><br><br>
+        <input type="submit" name='submit'value="Log In"><br><br>
         <!--<label class="psw">Forgot <a href="forgotpassword.html">password?</a></label><br>-->
         <label>Don't have an account? <a href="signup.html">Register</a></label><br><br><br>
             
@@ -96,6 +103,30 @@
     </div>
  
     </form>
+    <div >
+    <?php
+        if(isset($_POST['submit'])){
+            $username = $_POST['uname'];
+            $password = $_POST['psw'];
+            $password = hash('sha512',$password);
+            $sql = "Select * from users where username='".$username."';";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                if($row['password']===$password){
+                    $_SESSION['user']=$username;
+                    echo "<h3 style='position:relative;left:640px'>Login Successful</h3>";
+                }
+                else{
+                    echo "<h3 style='color:red;position:relative;left:640px'>Wrong Password</h3>";
+                }
+            }
+            else{
+                echo "<h3 style='color:red;position:relative;left:590px'>Username does not exist</h3>";
+            }
+        }
+    ?>
+    </div><br>
 </main>
     <?php include 'footer.php' ?>
     <!--<embed type="text/html" src="footer.html" style="width:100%;height:340px">-->
