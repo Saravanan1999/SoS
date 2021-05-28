@@ -38,12 +38,17 @@
                 height: 48px;
                 width: 48px;
             }
-
+            
             .carousel-item .col, .col-sm, .col-md {
                 margin: 8px;
                 height: 300px;
                 background-size: cover;
                 background-position: center center;
+            }
+            .ignore-css{
+                all:unset;
+                cursor: pointer;
+                color:white;
             }
         </style>
     </head>
@@ -179,23 +184,36 @@
                                     if($cnt==0){
                                         
                                         echo "<div class='carousel-item'><div class='row'>";
+                                        
                                         echo "<div style='background-image:url(".$row['Image_URL'].");color:white;' class='col-12 col-md d-flex align-items-bottom justify-content-center'>";
-                                        echo "<div style='position:relative;top:280px;background:black;width:100%;height:30px;'>".$row['Product_Name']."</div>";
+                                        
+                                        echo "<div style='position:relative;top:280px;background:black;width:100%;height:30px;'>";
+                                        echo "<a class='ignore-css' href='product_detail.php?id=".$row['Product_ID']."'>";
+                                        echo $row['Product_Name'];
+                                        echo "</a></div>";
                                         echo "</div>";
                                         
                                         $cnt++;
                                     }
                                     else if($cnt==1){
                                         echo "<div style='background-image:url(".$row['Image_URL'].");color:white;' class='col-12 col-md d-flex align-items-center justify-content-center'>";
-                                        echo "<div style='position:relative;top:145px;background:black;width:100%;height:30px;'>".$row['Product_Name']."</div>";
+                                        echo "<div style='position:relative;top:145px;background:black;width:100%;height:30px;'>";
+                                        echo "<a class='ignore-css' href='product_detail.php?id=".$row['Product_ID']."'>";
+                                        echo $row['Product_Name'];
+                                        echo "</a></div>";
                                         echo "</div>";
                                        
                                        $cnt++;
                                     }
                                     else if($cnt==2){
                                         echo "<div style='background-image:url(".$row['Image_URL'].");color:white;' class='col-12 col-md d-flex align-items-center justify-content-center' class='col-12 col-md d-flex align-items-center justify-content-center'>";
-                                        echo "<div style='position:relative;top:145px;background:black;width:100%;height:30px;'>".$row['Product_Name']."</div>";
-                                        echo "</div></div></div>";
+                                        echo "<div style='position:relative;top:145px;background:black;width:100%;height:30px;'>";
+                                        echo "<a class='ignore-css' href='product_detail.php?id=".$row['Product_ID']."'>";
+                                        echo $row['Product_Name'];
+                                        echo "</a></div>";
+                                        echo "</div>";
+                                        
+                                        echo "</div></div>";
                                       
                                        $cnt=0;
                                     }
