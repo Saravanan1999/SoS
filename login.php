@@ -29,8 +29,10 @@
                 
                 color:lawngreen;
             }
-            .dropdown{
-                z-index: 999;
+            .dropdown-menu{
+                top:55px;
+                z-index: 99; 
+                
             }
         </style>
         <style>
