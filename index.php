@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <style>
             .abc{
                 color:black;
@@ -34,9 +34,20 @@
                 z-index: 99; 
                 
             }
+            .carousel-nav-icon {
+                height: 48px;
+                width: 48px;
+            }
+
+            .carousel-item .col, .col-sm, .col-md {
+                margin: 8px;
+                height: 300px;
+                background-size: cover;
+                background-position: center center;
+            }
         </style>
     </head>
-    <body>
+    <body onload="cen()">
         
         <div class="cover">
 
@@ -74,6 +85,7 @@
            
         </nav>
         <script>
+            let car=0;
             function myFunction() {
                 document.getElementById("myDropdown").classList.toggle("show");
             }
@@ -132,43 +144,129 @@
                 <img src="assets/images/about.jpg" style="height:350px;padding:50px;">
             </div>
         </div>
-        <center>
-        <div class="freq-bought">
-            <br>
-            <h2>Frequently bought products:</h2><br>
-            <figure>
-            <a href="#"><img src="assets/images/black.jpg" style="width:200px;"></a>
-            <figcaption>consectetur adipiscing elit, sed do eiusmod tempor incididunt<br><br>
-                <button class="buy">Buy me</button>
-            </figcaption>
-            </figure>
-            <figure>
-              <a href="#">  <img src="assets/images/black.jpg" style="width:200px;"></a>
-              <figcaption>consectetur adipiscing elit, sed do eiusmod tempor incididunt<br><br>
-                <button class="buy">Buy me</button>
-            </figcaption>
-        </figure>
-            <figure>
-               <a href="#"> <img src="assets/images/black.jpg" style="width:200px;"></a>
-               <figcaption>consectetur adipiscing elit, sed do eiusmod tempor incididunt<br><br>
-                <button class="buy">Buy me</button>
-            </figcaption>
-        </figure>
-            <figure>
-              <a href="#">  <img src="assets/images/black.jpg" style="width:200px;"></a>
-            <figcaption>consectetur adipiscing elit, sed do eiusmod tempor incididunt<br><br>
-                <button class="buy">Buy me</button>
-            </figcaption>
-            </figure>
-            
-            
-        </div></center><br><br><br>
+        <?php
+            $sql = "SELECT * from `product` where `freq`='yes';";
+            $result = $conn->query($sql) or die(mysqli_error($conn));
+            if ($result->num_rows > 0) {
+        ?>
+        <div class="my-5 text-center container">
+            <div class="row mb-2">
+                <div class="col text-center">
+                    <h1>Frequenty Bought Products</h1>
+                    
+                </div>
+            </div>
+            <div class="row d-flex align-items-center">
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                    <a href="#carouselExampleIndicators" role="button"  onclick='prev()'>
+                        <div class="carousel-nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <path d="m88.6,121.3c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8,0l-54,53.9c-1.6,1.6-1.6,4.2 0,5.8l54,53.9z"/>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="col-10">
+                    <!--Start carousel-->
+                    <div id="carouselExampleIndicators" class="carousel slide" >
+
+                        <div class="carousel-inner">
+                            <?php 
+                                $cnt=0;
+                                while($row = $result->fetch_assoc()) {
+                                    
+                                    if($cnt==0){
+                                        
+                                        echo "<div class='carousel-item'><div class='row'>";
+                                        echo "<div style='background-image:url(".$row['Image_URL'].");color:white;' class='col-12 col-md d-flex align-items-bottom justify-content-center'>";
+                                        echo "<div style='position:relative;top:280px;background:black;width:100%;height:30px;'>".$row['Product_Name']."</div>";
+                                        echo "</div>";
+                                        
+                                        $cnt++;
+                                    }
+                                    else if($cnt==1){
+                                        echo "<div style='background-image:url(".$row['Image_URL'].");color:white;' class='col-12 col-md d-flex align-items-center justify-content-center'>";
+                                        echo "<div style='position:relative;top:145px;background:black;width:100%;height:30px;'>".$row['Product_Name']."</div>";
+                                        echo "</div>";
+                                       
+                                       $cnt++;
+                                    }
+                                    else if($cnt==2){
+                                        echo "<div style='background-image:url(".$row['Image_URL'].");color:white;' class='col-12 col-md d-flex align-items-center justify-content-center' class='col-12 col-md d-flex align-items-center justify-content-center'>";
+                                        echo "<div style='position:relative;top:145px;background:black;width:100%;height:30px;'>".$row['Product_Name']."</div>";
+                                        echo "</div></div></div>";
+                                      
+                                       $cnt=0;
+                                    }
+                                    
+                                }
+                            ?>      
+                                    
+                        </div>            
+                                    
+                                    
+                                        
+                                    
+                    </div>
+                            
+                    
+                    <!--End carousel-->
+                </div>
+                <div class="col-1 d-flex align-items-center justify-content-center"><a  href="#carouselExampleIndicators" onclick='next()'>
+                    <div class="carousel-nav-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path d="m40.4,121.3c-0.8,0.8-1.8,1.2-2.9,1.2s-2.1-0.4-2.9-1.2c-1.6-1.6-1.6-4.2 0-5.8l51-51-51-51c-1.6-1.6-1.6-4.2 0-5.8 1.6-1.6 4.2-1.6 5.8,0l53.9,53.9c1.6,1.6 1.6,4.2 0,5.8l-53.9,53.9z"/>
+                        </svg>
+                    </div>
+                    </a>
+                </div>
+            <?php
+                }
+            ?>
+            </div>
+        </div>
+        <br><br><br>
         <?php include 'footer.php' ?>
         <!--<embed type="text/html" src="footer.html" style="width:100%;height:340px">-->
 
         <script>
-        
-       
+        function cen(){
+            var carousel = document.querySelectorAll(".carousel-item");
+            carousel[car].className="carousel-item active";
+        }
+        function prev(){
+            var carousel = document.querySelectorAll(".carousel-item");
+            var active = document.querySelector(".carousel-item.active");
+            
+            carousel[car].className="carousel-item";
+            
+            
+            if(car==0){
+                car=carousel.length-1;
+                carousel[car].className="carousel-item active";
+            }
+            else{
+                carousel[car-1].className="carousel-item active";
+                car--;
+            }
+        }
+        function next(){
+            var carousel = document.querySelectorAll(".carousel-item");
+            var active = document.querySelector(".carousel-item.active");
+            
+            carousel[car].className="carousel-item";
+            
+            
+            if(car==carousel.length-1){
+                car=0;
+                carousel[car].className="carousel-item active";
+            }
+            else{
+                carousel[car+1].className="carousel-item active";
+                car++;
+            }
+        }
         if ($('#clrfx').length > 0){
           (function(){
             $(document).click(function() {
