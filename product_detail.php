@@ -120,7 +120,7 @@
            <input type="search" placeholder="Enter product" ><button type="submit" style='height:35px;'><i class="fa fa-search"></i></button> 
            <a href="index.php">Home</a>
            <a href="index.php#about">About</a>
-           <a href="#"><u>Products</u></a>
+           <a href="product_page.php?query=All"><u>Products</u></a>
            <a href="#">Contact</a>            
            
            <a href="#" id="cart" style="width:300px;"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><?php echo $_SESSION['quan'] ?></span></a> 

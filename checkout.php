@@ -3,9 +3,6 @@
 <?php 
     include 'db_conn.php';
     session_start();
-    if(isset($_SESSION['placed'])){
-        
-    }
     if(!isset($_SESSION['total'])){
         $_SESSION['total']=0;
         $_SESSION['quan']=0;
@@ -64,7 +61,7 @@
         echo "<button id='dLabel' type='button' data-toggle='dropdown' aria-haspopup='true' onclick='myFunction()' aria-expanded='false' style='margin-right:90px;width:150px;'>".$_SESSION['user']."</button>";
         echo "<div class='dropdown-menu' id='myDropdown' aria-labelledby='dLabel' style='width:200px;text-align:center'>";
         echo "<a href='#' style='display:none'></a>";
-        echo "<a class='abc' href='#' style='font-size:15px;width:200px;text-align:center;;overflow:hidden;padding:0px;'>View Orders</a><hr>";
+        echo "<a class='abc' href='orderview.php' style='font-size:15px;width:200px;text-align:center;;overflow:hidden;padding:0px;'>View Orders</a><hr>";
         echo "<a class='abc' href='reset.php' style='font-size:15px;width:200px;padding:0px;text-align:center;'>Reset Password</a><hr>";
         echo "<a class='abc' href='index.php?logout=true' style='font-size:15px;width:200px;padding:0px;text-align:center;'>Logout</a>";
         echo "<a href='#' style='display:none'></a>";
@@ -222,7 +219,7 @@
                                             $total = $_SESSION['totship'];
                                             $ship = $_SESSION['ship'];
                                             
-                                            $sql0 = "SELECT * FROM `orders` WHERE `orderid`=(SELECT max(`orderid`) FROM `orders`);";
+                                            $sql0 = "SELECT * FROM `orders` WHERE `Orderid`=(SELECT max(`Orderid`) FROM `orders`);";
                                             $result0 = $conn->query($sql0)or die(mysqli_error($conn));
                                             
                                             $row0 = $result0->fetch_assoc(); 
@@ -238,9 +235,10 @@
                                                     $nme = $_SESSION['name'][$i];
                                                     $qty = $_SESSION['quantity'][$i];
                                                     $price = $_SESSION['price'][$i];
-                                                    $sql3 = "SELECT * from `product` where `Product_Name`='$name'";
+                                                    $sql3 = "SELECT * from `product` where `Product_Name`='$nme'";
                                                     $result3 = $conn->query($sql3)or die(mysqli_error($conn));
                                                     $row3 = $result3->fetch_assoc(); 
+                                                   
                                                     $productid = $row3['Product_ID'];
                                                     $sql2 = "INSERT INTO `productorder`(`productid`, `orderid`, `price`, `quantity`) VALUES ('$productid','$orderid','$price','$qty')";
                                                     $conn->query($sql2);
