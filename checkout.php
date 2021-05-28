@@ -3,6 +3,9 @@
 <?php 
     include 'db_conn.php';
     session_start();
+    if(isset($_SESSION['placed'])){
+        
+    }
     if(!isset($_SESSION['total'])){
         $_SESSION['total']=0;
         $_SESSION['quan']=0;
@@ -11,6 +14,7 @@
         session_destroy();
         header("location: index.php");
     }
+    
 ?>
 
  <head>
@@ -240,11 +244,25 @@
                                                     $productid = $row3['Product_ID'];
                                                     $sql2 = "INSERT INTO `productorder`(`productid`, `orderid`, `price`, `quantity`) VALUES ('$productid','$orderid','$price','$qty')";
                                                     $conn->query($sql2);
+                                                    
                                                 }
                                                 echo "<h4 style='margin-top:20px;margin-left:70px;'>Order Placed</h4>";
+                                               
+                                                unset($_SESSION['total']);
+                                                unset($_SESSION['quan']);
+                                                unset($_SESSION['name']);
+                                                unset($_SESSION['price']);
+                                                unset($_SESSION['quantity']);
+                                                unset($_SESSION['ship']);
+                                                unset($_SESSION['totship']);
+                                                unset($_SESSION['url']);
+                                                unset($_SESSION['placed']);
+                                                
+                                                
+                                                
                                             }
                                             else{
-                                                echo "<h4 style='margin-top:20px;margin-left:20px;'>Some Placed</h4>";
+                                                echo "<h4 style='margin-top:20px;margin-left:20px;'>Could not place the order</h4>";
                                             }
                                         }
                                         
@@ -296,5 +314,6 @@
             })();
           }
       </script>
+      
     </body>
 </html>
