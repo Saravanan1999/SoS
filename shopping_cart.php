@@ -1,4 +1,5 @@
 <html>
+    
     <?php 
         include 'db_conn.php';
         session_start();
@@ -6,6 +7,16 @@
         if(!isset($_SESSION['total'])){
             $_SESSION['total']=0;
             $_SESSION['quan']=0;
+        }
+        if(!isset($_SESSION['totship'])){
+            $_SESSION['totship']=$_SESSION['total']+50;
+            $_SESSION['ship']=50;
+            echo "<div id='hi' style='display:none'>".$_SESSION['ship']."</div>";
+        }
+        if(isset($_GET['totship'])){
+            $_SESSION['totship']=$_GET['totship'];
+            $_SESSION['ship']=$_GET['ship'];
+            echo "<div id='hi' style='display:none'>".$_SESSION['ship']."</div>";
         }
         if(isset($_GET['logout'])){
             session_destroy();
@@ -51,7 +62,20 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
-        
+        <style>
+            .abc{
+                color:black;
+            }
+            .abc:hover{
+                
+                color:lawngreen;
+            }
+            .dropdown-menu{
+                top:55px;
+                z-index: 99; 
+                
+            }
+        </style>
     </head>
     <body>
         
@@ -160,7 +184,15 @@
                     ?>
                     </div>
                     <script>
-                        
+                        $( document ).ready(function() {
+                            var a = document.getElementById('hi').innerHTML;
+                            if(a=="50"){
+                                $('#delivery').val('50');
+                            }
+                            else{
+                                $('#delivery').val('100');
+                            }
+                        });
                         if ($('#rowbr').length > 0) {
             
                         }
@@ -221,7 +253,7 @@
                         <div class="col text-right">&#8377;<?php echo $_SESSION['total'] ?></div>
                     </div>
                     <form>
-                        <p>SHIPPING</p> <select id="delivery" onclick="del()">
+                        <p>SHIPPING</p> <select id="delivery" onchange="del()">
                             <option class="text-muted" value="50">Standard-Delivery- &#8377;50</option>
                             <option class="text-muted" value="100">Express-Delivery- &#8377;100</option>
                         </select>
@@ -232,14 +264,15 @@
                             var total = parseInt(document.getElementById('hid').innerHTML);
                             var ship = parseInt(document.getElementById('delivery').value);
                             var totship = total+ship;
-                            document.getElementById('tot').innerHTML=totship;
+                            window.location.href="shopping_cart.php?totship="+totship+"&ship="+ship;
+                            
                         }
                     </script>
                     <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                     <div class="col">TOTAL PRICE</div>
                     <div id="hid" style="display:none"><?php echo $_SESSION['total']?> </div>
-                    <div class="col text-right" id="tot"></div>
-                    </div> <button class="btn btn-primary btn-block" id="checkout">CHECKOUT</button>
+                    <div class="col text-right" id="tot"><?php echo $_SESSION['totship'] ?></div>
+                    </div> <a href="checkout.php"><button class="btn btn-primary btn-block" id="checkout">CHECKOUT</button></a>
                     <script>
                         
                         if ($('#rowbr').length > 0){
@@ -256,7 +289,11 @@
         </main><br>
         <?php include 'footer.php' ?>
         <!--<embed type="text/html" src="footer.html" style="width:100%;height:340px">-->
-
+        <script>
+            if ( window.history.replaceState ) {
+                window.history.replaceState( null, null, window.location.href );
+            }
+        </script>
         <script>
         if ($('#clrfx').length > 0){
           (function(){

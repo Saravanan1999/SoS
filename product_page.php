@@ -58,7 +58,7 @@
         <nav>
            
             <a href="index.php" ><img src="assets/images/logo.jpg" style="height:80px;width:140px;"></a>
-            <input type="search" placeholder="Enter product"><button type="submit"><i class="fa fa-search"></i></button> 
+            <input type="search" placeholder="Enter product"><button type="submit" class='search'><i class="fa fa-search"></i></button> 
             <a href="index.php">Home</a>
             <a href="index.php#about">About</a>
             <a href="#"><u>Products</u></a>
@@ -77,7 +77,7 @@
             echo "<a href='#' style='display:none'></a>";
             echo "</div>";
             echo "</div>";
-        }
+            }
             else{
                 echo "<a href='signup.php'><button class='sign'>Sign Up</button></a>";
             }
