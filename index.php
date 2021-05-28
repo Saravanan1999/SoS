@@ -44,6 +44,8 @@
                 height: 300px;
                 background-size: cover;
                 background-position: center center;
+                box-shadow: 8px 8px 16px 4px #9E9E9E;
+                margin-left:40px;
             }
             .ignore-css{
                 all:unset;

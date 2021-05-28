@@ -6,6 +6,7 @@
     if(!isset($_SESSION['total'])){
         $_SESSION['total']=0;
         $_SESSION['quan']=0;
+        
     }
     if(isset($_GET['logout'])){
         session_destroy();
@@ -35,7 +36,7 @@
             }
             .topnav{
                 
-                
+                z-index:999;
                 
             }
             .dropdown{
@@ -51,12 +52,29 @@
                 z-index:999;
                 
             }
-            
+            img{
+                box-shadow: 8px 8px 16px 4px #9E9E9E;
+            }
+            .price{
+                font-size:15px;
+                font-weight:800;
+            }
+            .pro_name{
+                margin-top:25px;
+                font-size:15px;
+                font-weight:800;
+                
+            }
         </style>
     </head>
-    <body>
+    <body onload="change()">
+        <?php
+            if(isset($_GET['sub'])){
+                echo "<div id='subc'style='display:none'>".$_GET['sub']."</div>";
+            }
+        ?>
         <nav>
-           
+            
             <a href="index.php" ><img src="assets/images/logo.jpg" style="height:80px;width:140px;"></a>
             <input type="search" placeholder="Enter product"><button type="submit" class='search'><i class="fa fa-search"></i></button> 
             <a href="index.php">Home</a>
@@ -66,21 +84,22 @@
             
             <a href="#" id="cart" style="width:300px;"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><?php echo $_SESSION['quan'] ?></span></a> 
             <?php 
-           if(isset($_SESSION['user'])){
-            echo "<div class='dropdown'>";
-            echo "<button id='dLabel' type='button' data-toggle='dropdown' aria-haspopup='true' onclick='myFunction()' aria-expanded='false' style='margin-right:90px;width:150px;'>".$_SESSION['user']."</button>";
-            echo "<div class='dropdown-menu' id='myDropdown' aria-labelledby='dLabel' style='width:200px;text-align:center'>";
-            echo "<a href='#' style='display:none'></a>";
-            echo "<a class='abc' href='orderview.php' style='font-size:15px;width:200px;text-align:center;;overflow:hidden;padding:0px;'>View Orders</a><hr>";
-            echo "<a class='abc' href='reset.php' style='font-size:15px;width:200px;padding:0px;text-align:center;'>Reset Password</a><hr>";
-            echo "<a class='abc' href='index.php?logout=true' style='font-size:15px;width:200px;padding:0px;text-align:center;'>Logout</a>";
-            echo "<a href='#' style='display:none'></a>";
-            echo "</div>";
-            echo "</div>";
-            }
-            else{
-                echo "<a href='signup.php'><button class='sign'>Sign Up</button></a>";
-            }
+            echo "<div id='ids' style='display:none' >".$_GET['query']."</div>";
+            if(isset($_SESSION['user'])){
+                echo "<div class='dropdown'>";
+                echo "<button id='dLabel' type='button' data-toggle='dropdown' aria-haspopup='true' onclick='myFunction()' aria-expanded='false' style='margin-right:90px;width:150px;'>".$_SESSION['user']."</button>";
+                echo "<div class='dropdown-menu' id='myDropdown' aria-labelledby='dLabel' style='width:200px;text-align:center'>";
+                echo "<a href='#' style='display:none'></a>";
+                echo "<a class='abc' href='orderview.php' style='font-size:15px;width:200px;text-align:center;;overflow:hidden;padding:0px;'>View Orders</a><hr>";
+                echo "<a class='abc' href='reset.php' style='font-size:15px;width:200px;padding:0px;text-align:center;'>Reset Password</a><hr>";
+                echo "<a class='abc' href='index.php?logout=true' style='font-size:15px;width:200px;padding:0px;text-align:center;'>Logout</a>";
+                echo "<a href='#' style='display:none'></a>";
+                echo "</div>";
+                echo "</div>";
+                }
+                else{
+                    echo "<a href='signup.php'><button class='sign'>Sign Up</button></a>";
+                }
             ?>
             
         </nav>
@@ -126,6 +145,7 @@
 
         <br><br><br>
         <div class="topnav" style="z-index:0;">
+            <a href="?query=All">All</a>
             <a href="?query=Seeds">Seeds</a>
             <a href="?query=Fertilizers">Fertilizers</a>
             <a href="?query=Pesticides">Pesticides</a>
@@ -138,23 +158,92 @@
                 echo $_GET['query'];
             } 
         ?>
+
         </h2></center><br><br>
-       
+        <div class='container' style='width:250px;'>
+            
+            <select class='form-select' id='sub' onchange="sub()">
+                
+                <option disabled selected value>Select Sub Category</option>
+                <?php 
+                    $sql1= "SELECT DISTINCT `subcategory` from product";
+                    $result1 = $conn->query($sql1);
+                    if ($result1->num_rows > 0) {
+                        while($row1 = $result1->fetch_assoc()){
+
+                        
+                
+                ?>
+                <option value="<?php echo $row1['subcategory']?>"><?php echo $row1['subcategory']?></option>
+                <?php 
+                    }
+                }
+                ?>
+            </select>
+        </div>
         <br><br>
         <center>
         <div class="row">
             <?php 
-            $sql = "SELECT * FROM product";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                  echo "<div class='col-lg-3 col-md-4 col-sm-6'>";
-                  echo " <a href='product_detail.php?id=".$row['Product_ID']."'><img src=".$row['Image_URL']." alt='prod_img' style='height:300px' ></a>";
-                  echo "<div class='pro_name'>".$row['Product_Name']."</div>";
-                  echo "<div class='price'>₹".$row['Price']."</div>";
-                  echo "</div>";
+            
+            if($_GET['query']=='All'){
+                if(isset($_GET['sub'])){
+                    $sql = "SELECT * FROM product where `subcategory`='".$_GET['sub']."';";
+                    $result = $conn->query($sql) or die(mysqli_error($conn));
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                        echo "<div class='col-lg-3 col-md-4 col-sm-6'>";
+                        echo " <a href='product_detail.php?id=".$row['Product_ID']."'><img src=".$row['Image_URL']." alt='prod_img' style='height:300px' ></a>";
+                        echo "<div class='pro_name'>".$row['Product_Name']."</div>";
+                        echo "<div class='price'>₹".$row['Price']."</div>";
+                        echo "</div>";
+                        }
+                    } 
                 }
-              } 
+                else{
+                    $sql = "SELECT * FROM product";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                        echo "<div class='col-lg-3 col-md-4 col-sm-6'>";
+                        echo " <a href='product_detail.php?id=".$row['Product_ID']."'><img src=".$row['Image_URL']." alt='prod_img' style='height:300px' ></a>";
+                        echo "<div class='pro_name'>".$row['Product_Name']."</div>";
+                        echo "<div class='price'>₹".$row['Price']."</div>";
+                        echo "</div>";
+                        }
+                    } 
+                }
+            }
+            
+            else{
+                if(isset($_GET['sub'])){
+                    $sql = "SELECT * FROM product where `subcategory`='".$_GET['sub']."' and `Category`='".$_GET['query']."';";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                        echo "<div class='col-lg-3 col-md-4 col-sm-6'>";
+                        echo " <a href='product_detail.php?id=".$row['Product_ID']."'><img src=".$row['Image_URL']." alt='prod_img' style='height:300px' ></a>";
+                        echo "<div class='pro_name'>".$row['Product_Name']."</div>";
+                        echo "<div class='price'>₹".$row['Price']."</div>";
+                        echo "</div>";
+                        }
+                    } 
+                }
+                else{
+                    $sql = "SELECT * FROM product where `Category`='".$_GET['query']."';";
+                    $result = $conn->query($sql);
+        
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                        echo "<div class='col-lg-3 col-md-4 col-sm-6'>";
+                        echo " <a href='product_detail.php?id=".$row['Product_ID']."'><img src=".$row['Image_URL']." alt='prod_img' style='height:300px' ></a>";
+                        echo "<div class='pro_name'>".$row['Product_Name']."</div>";
+                        echo "<div class='price'>₹".$row['Price']."</div>";
+                        echo "</div>";
+                        }
+                    } 
+                }
+            }
             
             ?>
         </div>
@@ -163,6 +252,15 @@
     <?php include 'footer.php' ?>
     <!--<embed type="text/html" src="footer.html" style="width:100%;height:340px">-->
     <script>
+        function change(){
+            var ids = document.getElementById('subc').innerHTML;
+            var sub = document.getElementById('sub').value=ids;
+        }
+        function sub(){
+            var sub = document.getElementById('sub').value;
+            var ids = document.getElementById('ids').innerHTML;
+            window.location.href="product_page.php?query="+ids+"&sub="+sub;
+        }
         if ($('#clrfx').length > 0){
           (function(){
             $(document).click(function() {
