@@ -66,7 +66,7 @@
             <input type="search" placeholder="Enter product"><button type="submit"><i class="fa fa-search"></i></button>
             <a href="#"><u>Home</u></a>
             <a href="#about">About</a>
-            <a href="product_page.php?query=All">Products</a>
+            <a href="product_page.php?query=All&min=0&max=5000">Products</a>
             <a href="#">Contact</a>
             
             

@@ -19,6 +19,7 @@
         
         <title>Tools</title>
         <link rel="stylesheet" href="assets/style/product.css">
+        <script src='assets/js/prod.js'></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
@@ -33,6 +34,9 @@
             .abc:hover{
                 z-index: 999; 
                 color:lawngreen;
+            }
+            nav{
+                z-index:999;
             }
             .topnav{
                 
@@ -52,7 +56,7 @@
                 z-index:999;
                 
             }
-            img{
+            .row img{
                 box-shadow: 8px 8px 16px 4px #9E9E9E;
             }
             .price{
@@ -70,7 +74,14 @@
     <body onload="change()">
         <?php
             if(isset($_GET['sub'])){
+            
                 echo "<div id='subc'style='display:none'>".$_GET['sub']."</div>";
+            }
+            if(isset($_GET['max'])){
+                echo "<div id='maxc'style='display:none'>".$_GET['max']."</div>";
+            }
+            if(isset($_GET['min'])){
+                echo "<div id='minc'style='display:none'>".$_GET['min']."</div>";
             }
         ?>
         <nav>
@@ -79,7 +90,7 @@
             <input type="search" placeholder="Enter product"><button type="submit" class='search'><i class="fa fa-search"></i></button> 
             <a href="index.php">Home</a>
             <a href="index.php#about">About</a>
-            <a href="#"><u>Products</u></a>
+            <a href="product_page.php?query=All&min=0&max=5000"><u>Products</u></a>
             <a href="#">Contact</a>            
             
             <a href="#" id="cart" style="width:300px;"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><?php echo $_SESSION['quan'] ?></span></a> 
@@ -144,13 +155,13 @@
         </div>
 
         <br><br><br>
-        <div class="topnav" style="z-index:0;">
-            <a href="?query=All">All</a>
-            <a href="?query=Seeds">Seeds</a>
-            <a href="?query=Fertilizers">Fertilizers</a>
-            <a href="?query=Pesticides">Pesticides</a>
-            <a href="?query=Machinery & Tools">Machinery & Tools</a>
-            <a href="?query=Others">Others</a>
+        <div class="topnav">
+            <a href="?query=All&min=0&max=5000">All</a>
+            <a href="?query=Seeds&min=0&max=5000">Seeds</a>
+            <a href="?query=Fertilizers&min=0&max=5000">Fertilizers</a>
+            <a href="?query=Pesticides&min=0&max=5000">Pesticides</a>
+            <a href="?query=Machinery and Tools&min=0&max=5000">Machinery & Tools</a>
+            <a href="?query=Others&min=0&max=5000">Others</a>
         </div>
         <center><h2 style="padding-top: 100px;">
         <?php 
@@ -159,9 +170,21 @@
             } 
         ?>
 
-        </h2></center><br><br>
-        <div class='container' style='width:250px;'>
+        </h2></center>
+        <div class="center">
             
+                <div class="dual-range" data-min="0" data-max="5000" style="margin-left:350px;z-index:1;">
+                
+                    <span class="handle left" id='mini' style='margin-top:25px;' ></span>
+                    <span class="highlight" style='margin-top:25px;'></span>
+                    <span class="handle right" id='maxi' style='margin-top:25px;'></span>
+                    <button name="button" class='btn btn-success' onclick='filter()'style='margin-left:200px;margin-top:15px;'>Filter</button>
+                </div>
+                
+            </div>
+           
+        <div class='container' style='width:250px;margin-left:50px;'>
+        
             <select class='form-select' id='sub' onchange="sub()">
                 
                 <option disabled selected value>Select Sub Category</option>
@@ -179,8 +202,10 @@
                     }
                 }
                 ?>
-            </select>
+            </select><br>
+            
         </div>
+        
         <br><br>
         <center>
         <div class="row">
@@ -188,7 +213,7 @@
             
             if($_GET['query']=='All'){
                 if(isset($_GET['sub'])){
-                    $sql = "SELECT * FROM product where `subcategory`='".$_GET['sub']."';";
+                    $sql = "SELECT * FROM product where `subcategory`='".$_GET['sub']."' and `Price` BETWEEN ".$_GET['min']." AND ".$_GET['max'].";";
                     $result = $conn->query($sql) or die(mysqli_error($conn));
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -201,7 +226,7 @@
                     } 
                 }
                 else{
-                    $sql = "SELECT * FROM product";
+                    $sql = "SELECT * FROM product where `Price` BETWEEN ".$_GET['min']." AND ".$_GET['max'].";";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -217,7 +242,7 @@
             
             else{
                 if(isset($_GET['sub'])){
-                    $sql = "SELECT * FROM product where `subcategory`='".$_GET['sub']."' and `Category`='".$_GET['query']."';";
+                    $sql = "SELECT * FROM product where `subcategory`='".$_GET['sub']."' and `Category`='".$_GET['query']."' and `Price` BETWEEN ".$_GET['min']."AND ".$_GET['max'].";";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -230,7 +255,7 @@
                     } 
                 }
                 else{
-                    $sql = "SELECT * FROM product where `Category`='".$_GET['query']."';";
+                    $sql = "SELECT * FROM product where `Category`='".$_GET['query']."'and `Price` BETWEEN ".$_GET['min']." AND ".$_GET['max'].";";
                     $result = $conn->query($sql);
         
                     if ($result->num_rows > 0) {
@@ -252,14 +277,37 @@
     <?php include 'footer.php' ?>
     <!--<embed type="text/html" src="footer.html" style="width:100%;height:340px">-->
     <script>
+        function filter(){
+            if ($('#subc').length > 0){
+                var mini = $('#mini').attr('data-value');
+                var maxi = $('#maxi').attr('data-value');
+                var ids = document.getElementById('ids').innerHTML;
+                var sub = document.getElementById('subc').innerHTML;
+                window.location.href="product_page.php?query="+ids+"&min="+mini+"&max="+maxi+"&sub="+sub;
+            }
+            else{
+                var mini = $('#mini').attr('data-value');
+                var maxi = $('#maxi').attr('data-value');
+                var ids = document.getElementById('ids').innerHTML;
+                window.location.href="product_page.php?query="+ids+"&min="+mini+"&max="+maxi;
+            }
+        }
         function change(){
-            var ids = document.getElementById('subc').innerHTML;
-            var sub = document.getElementById('sub').value=ids;
+            if ($('#subc').length > 0){
+                var ids = document.getElementById('subc').innerHTML;
+                var sub = document.getElementById('sub').value=ids;
+            }
+            var mini = document.getElementById('minc').innerHTML;
+            var maxi = document.getElementById('maxc').innerHTML;
+            $('#mini').attr('data-value',mini);
+            $('#maxi').attr('data-value',maxi);
         }
         function sub(){
             var sub = document.getElementById('sub').value;
             var ids = document.getElementById('ids').innerHTML;
-            window.location.href="product_page.php?query="+ids+"&sub="+sub;
+            var mini = $('#mini').attr('data-value');
+            var maxi = $('#maxi').attr('data-value');
+            window.location.href="product_page.php?query="+ids+"&min="+mini+"&max="+maxi+"&sub="+sub;
         }
         if ($('#clrfx').length > 0){
           (function(){
