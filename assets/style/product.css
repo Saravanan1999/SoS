@@ -85,6 +85,12 @@ nav input{
     background-color: #ddd;
     color: black;
   }
+  .glyphicon-star {
+    color:gold;
+  }
+  span.glyphicon-calendar {
+    padding-left:20px;
+  }
 .search{
     height:35px;
     width:50px;

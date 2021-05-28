@@ -3,13 +3,30 @@
 <?php 
     include 'db_conn.php';
     session_start();
+    echo "<div id='aa' style='display:none' >".$_GET['id']."</div>";
     if(!isset($_SESSION['total'])){
         $_SESSION['total']=0;
         $_SESSION['quan']=0;
     }
+    
     if(isset($_GET['logout'])){
         session_destroy();
         header("location: index.php");
+    }
+    if(isset($_COOKIE['review'])){
+
+        $review = $_COOKIE['review'];
+        
+        $rating = $_COOKIE['rating'];
+        $id = $_GET['id'];
+        $user = $_SESSION['user'];
+        $date = date("d-m-Y");
+        $sql = "INSERT INTO `productreview`(`productid`, `username`, `review`, `rating`, `date`) VALUES ('$id','$user','$review','$rating','$date');";
+        if ($conn->query($sql) == TRUE or die(mysqli_error($conn))) {
+        }
+        
+        setcookie('review', '', time() - 3600, '/'); 
+        setcookie('rating', '', time() - 3600, '/'); 
     }
 ?>
 
@@ -21,12 +38,15 @@
     <meta name="author" content="">
     <link rel="icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" href="assets/style/product.css">
+    <link rel="stylesheet" href="assets/style/panel.css">
     <!--<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">-->
 
     <title>Tools</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="assets/vendor/jquery/jquery.min.js" type="text/javascript"></script>
     <!-- Bootstrap core CSS -->
    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+   
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
@@ -37,6 +57,7 @@
     <link rel="stylesheet" href="assets/style/style.css">
     <link rel="stylesheet" href="assets/style/owl.css">
     <style>
+        .glyphicon-star:before{content:"\e006"}.glyphicon-star-empty:before{content:"\e007"}
             .abc{
                 color:black;
             }
@@ -52,10 +73,22 @@
                 z-index: 99; 
                 
             }
+            .rating {
+            width: 180px;
+            }
+
+            .rating__star {
+            cursor: pointer;
+            color: #dabd18b2;
+            }
         </style>
+        <script>
+            let count=1;
+        </script>
   </head>
   <body>
   <?php
+  
         $sql = "SELECT * FROM product where Product_ID='".$_GET['id']."';";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
@@ -266,8 +299,137 @@
             </div>
         </div>
     </div>
+    <?php 
+            $sql = "SELECT * from `productreview` where `productid`='".$_GET['id']."';";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+    ?>
+    <hr>
+    
+    <div class="container">
+    <h1>Customer Reviews</h1><br>
+
+    <div class="row-fluid"> 
+      <div class="col-sm-10">
+          <div class="panel panel-default">
+          
+          <?php
+            
+                while($row = $result->fetch_assoc()) {
+                    
+               
+          ?>
+          <div class="panel-body" itemprop="reviewBody">
+            <p style='font-size:20px'><?php echo $row['review'] ?></p>
+
+            <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+              
+              <span itemprop="name">-- <?php echo $row['username'];?></span>
+            </span><!--/author schema -->
+
+              <i class='fa fa-calendar'></i>
+
+              <meta itemprop="datePublished" style="font-size:10px" content=<?php echo $row['date']; ?>><?php echo $row['date']; ?>
+              
+              <span class="pull-right">
+              <span class="reviewRating" itemscope itemtype="http://schema.org/Rating">
+                <meta itemprop="worstRating" content="1">
+                  <span itemprop="ratingValue"><?php echo $row['rating'] ?></span> / 
+                <span itemprop="bestRating"> stars </span>
+              </span><!--/reviewRating-->
+              <?php
+              for($i=0;$i<$row['rating'];$i++){
+                echo "<i class='fa fa-star'></i>";
+                
+              }
+            ?>
+          </div><!--/panel-body-->
+          
+          <?php
+            }
+        }
+          ?>
+        </div><!--/panel-->
+    </div>
+
+                </div></div>
+                <hr />
+    <div class='container'>
+    <h1>Review the product:</h1><br>
+        <div class="col-sm-10">
+            
+            <div class="panel panel-default">
+                <div class="panel-body" >
+               
+                    <div class="rating">
+                    <span style='font-size:20px;'>Rating:</span>
+                        <i class="rating__star fa fa-star-o"></i>
+                        <i class="rating__star fa fa-star-o"></i>
+                        <i class="rating__star fa fa-star-o"></i>
+                        <i class="rating__star fa fa-star-o"></i>
+                        <i class="rating__star fa fa-star-o"></i>
+                    </div>
+                    <span style='font-size:20px;'>Review:</span><br>
+                    <textarea class="form-control" id='review' style="width:80%;height:200px;"></textarea><br>
+                    <button id='submit' class="btn btn-primary" onclick='review()' style='margin-left:360px;'>Submit</button>
+                </div>
+            </div></h5>
+        </div>
+    </div>
     <?php include 'footer.php' ?>
     <script>
+        const ratingStars = [...document.getElementsByClassName("rating__star")];
+        
+        function executeRating(stars) {
+            const starClassActive = "rating__star fa fa-star";
+            const starClassInactive = "rating__star fa fa-star-o";
+            const starsLength = stars.length;
+            
+            stars.map((star) => {
+                star.onclick = () => {
+                i = stars.indexOf(star);
+                var cnt =0;
+                if (star.className===starClassInactive) {
+                    for (i; i >= 0; --i) {
+                        stars[i].className = starClassActive;
+                        cnt+=1;
+                        
+                    }
+                } else {
+                    for (i; i < starsLength; ++i) stars[i].className = starClassInactive;
+                }
+                count=cnt;
+                };
+            });
+        }
+        executeRating(ratingStars);
+        
+   
+        function createCookie(name, value, days) {
+            var expires;
+            
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toGMTString();
+            }
+            else {
+                expires = "";
+            }
+            
+            document.cookie = escape(name) + "=" + 
+                escape(value) + expires + "; path=/";
+        }
+        function review(){
+            
+            var review = document.getElementById('review').value;
+            
+            createCookie("review", review, "10");
+            createCookie("rating", count, "10");
+            
+            
+            window.location.href="product_detail.php?id="+document.getElementById('aa').innerHTML;
+        }
         if($('#no').length > 0){
             $(document).ready(function(){
                 $("#exampleModal").modal('show');
