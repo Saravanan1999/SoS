@@ -1,4 +1,5 @@
 <html>
+    <head>
     <?php 
         include 'db_conn.php';
         session_start();
@@ -8,14 +9,12 @@
             $_SESSION['quan']=0;
         }
         if(isset($_GET['logout'])){
-          session_destroy();
-          header("location: index.php");
-      }
+            session_destroy();
+            header("location: index.php");
+        }
     ?>
-    <head>
-      
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="assets/style/login.css"> 
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -35,16 +34,22 @@
                 z-index: 99; 
                 
             }
-      </style>
-      </head>
+        </style>
+        <style>
+            form a{
+                color:black;
+                text-decoration:none;
+            }
+        </style>
+    </head>
     <body>
-        
+    
         <div class="cover">
             
         </div>
         <nav>
-           
-          <a href="index.php" ><img src="assets/images/logo.jpg" style="height:80px;width:140px"></a>
+        
+            <a href="index.php" ><img src="assets/images/logo.jpg" style="height:80px;width:140px"></a>
             <input type="search" placeholder="Enter product"><button type="submit"><i class="fa fa-search"></i></button>
             <a href="index.php">Home</a>
             <a href="index.php#about">About</a>
@@ -55,22 +60,21 @@
             <a href="#" id="cart" style="width:300px;"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><?php echo $_SESSION['quan'] ?></span></a> 
             <?php 
             if(isset($_SESSION['user'])){
-              echo "<div class='dropdown'>";
-              echo "<button id='dLabel' type='button' data-toggle='dropdown' aria-haspopup='true' onclick='myFunction()' aria-expanded='false' style='margin-right:90px;width:150px;'>".$_SESSION['user']."</button>";
-              echo "<div class='dropdown-menu' id='myDropdown' aria-labelledby='dLabel' style='width:200px;text-align:center'>";
-              echo "<a href='#' style='display:none'></a>";
-              echo "<a class='abc' href='#' style='font-size:15px;width:200px;text-align:center;;overflow:hidden;padding:0px;'>View Orders</a><hr>";
-              echo "<a class='abc' href='#' style='font-size:15px;width:200px;padding:0px;text-align:center;'>Reset Password</a><hr>";
-              echo "<a class='abc' href='index.php?logout=true' style='font-size:15px;width:200px;padding:0px;text-align:center;'>Logout</a>";
-              echo "<a href='#' style='display:none'></a>";
-              echo "</div>";
-              echo "</div>";
-          }
+                echo "<div class='dropdown'>";
+                echo "<button id='dLabel' type='button' data-toggle='dropdown' aria-haspopup='true' onclick='myFunction()' aria-expanded='false' style='margin-right:90px;width:150px;'>".$_SESSION['user']."</button>";
+                echo "<div class='dropdown-menu' id='myDropdown' aria-labelledby='dLabel' style='width:200px;text-align:center'>";
+                echo "<a href='#' style='display:none'></a>";
+                echo "<a class='abc' href='#' style='font-size:15px;width:200px;text-align:center;;overflow:hidden;padding:0px;'>View Orders</a><hr>";
+                echo "<a class='abc' href='#' style='font-size:15px;width:200px;padding:0px;text-align:center;'>Reset Password</a><hr>";
+                echo "<a class='abc' href='index.php?logout=true' style='font-size:15px;width:200px;padding:0px;text-align:center;'>Logout</a>";
+                echo "<a href='#' style='display:none'></a>";
+                echo "</div>";
+                echo "</div>";
+            }
             else{
-                echo "<a href='login.php'><button class='sign'>Log In</button></a>";
+                echo "<a href='signup.php'><button class='sign'>Sign Up</button></a>";
             }
             ?>
-            
             
         </nav>
         <script>
@@ -111,91 +115,83 @@
 
                 <a href="shopping_cart.php" class="button">Checkout <i class="fa fa-chevron-right"></i></a>
             </div> <!--end shopping-cart -->
-        </div>
-<main >
-  <form action="" method="post">
-  <div class="logincontainer">
-    <h1>Sign Up</h1>
-    <p>Please fill in this form to create an account.</p>
-    <hr>
+            </div><br><br>
+            <div class="container">
+		<div class="innerwrap">
+		
+			<section class="section1 clearfix">
+				<div class="textcenter">
+					
+					
+					<h1>Contact Us</h1>
+				</div>
+			</section>
+		
+			<section class="section2 clearfix">
+				<div class="col2 column1 first">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.0016964237752!2d79.15722245033282!3d12.971742990810974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bad479f0ccbe067%3A0xfef222e5f36ecdeb!2sVellore%20Institute%20of%20Technology!5e0!3m2!1sen!2sin!4v1622349334338!5m2!1sen!2sin" width="100%" height="550" style="border:0;overflow:hidden;" allowfullscreen="" loading="lazy"></iframe>
+					
+				</div>
+				<div class="col2 column2 last">
+					<div class="sec2innercont">
+						<div class="sec2addr">
+							<p><span class="collig">Address :</span> Tiruvalam Rd, Katpadi, Vellore, Tamil Nadu 632014</p>
+							<p><span class="collig">Phone : </span> +918888888888</p>
+							<p><span class="collig">Email :</span> support@sos.com</p>
+						</div>
+					</div>
+					<div class="sec2contactform">
+						<h3 class="sec2frmtitle">Drop Us a Message</h3>
+						<form action="#" method="post">
+							<div class="clearfix">
+								<input class="col2 first" type="text" name="firstname" placeholder="FirstName" required>
+								<input class="col2 last" type="text" name="lastname" placeholder="LastName" required>
+							</div>
+							<div class="clearfix">
+								<input  class="col2 first" type="email" name="email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" style="border: 0;height:40px;font-family: sans-serif;margin: 7px 0; background: #EDEDED;" required>
+								<input class="col2 last" type="text" name="phone" placeholder="Contact Number"  minlength="9" maxlength="15" pattern="^[0-9]{9,15}$" required>
+							</div>
+							<div class="clearfix">
+								<textarea name="message"  maxlength="65535" cols="30" rows="7" Placeholder="Your message here..."  required></textarea>
+							</div>
+							<div class="clearfix"><input type="submit" name="submit" value="Send"></div>
+						</form>
+                        <?php
+                            if(isset($_POST['submit'])){
+                                $firstname = $_POST['firstname'];
+                                $lastname = $_POST['lastname'];
+                                $email = $_POST['email'];
+                                $phone = $_POST['phone'];
+                                $message = htmlspecialchars($_POST['message']);
+                                $sql = "INSERT INTO `feedback`(`firstname`, `lastname`, `email`, `phone`, `message`) VALUES ('$firstname','$lastname','$email','$phone','$message')";
+                                
+                                if ($conn->query($sql) == TRUE or die(mysqli_error($conn))) {
+                                    echo "<h3>Feedback sent successfully!!</h3>";
+                                }
+                                else{
+                                    echo "<h3>Feedback was not sent successfully!!</h3>";
+                                }
 
-    <label for="email"><b>Email</b></label><br>
-    <input type="text" placeholder="Enter Email" name="email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-]+$" required><br>
-    <label for="Username"><b>Username</b></label><br>
-    <input type="text" placeholder="Enter Username" name="username" required><br>
+                            }
+                        ?>
+					</div>
 
-    <label for="psw"><b>Password</b></label><br>
-    <input type="password" placeholder="Enter Password" name="psw" minlength="8" required><br>
+				</div>
+			</section>
+		
+		</div>
+	</div>      
 
-    <label for="psw-repeat"><b>Repeat Password</b></label><br>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" minlength="8" required><br>
-
-    
-    <label for="number"><b>Mobile Number</b></label><br>
-    <input type="tel" placeholder="Mobile Number" name="tel" pattern="\d*" minlength="10" maxlength="10" required><br>
-    <label for="country"><b>Country</b></label><br>
-    <select style="height:50px;" name='country'>
-      <option value="Australia">Australia</option>
-      <option value="Brazil">Brazil</option>
-      <option value="Canada">Canada</option>
-      <option value="China">China</option>
-      <option value="China">France</option>
-      <option value="China">Germany</option>
-      <option value="India">India</option>
-      <option value="Italy">Italy</option>
-      <option value="Japan">Japan</option>
-      <option value="Mexico">Mexico</option>
-      <option value="Spain">Spain</option>
-      <option value="Sweden">Sweden</option>
-      <option value="United Arab Emirates	">United Arab Emirates	</option>
-      <option value="United Kingdom">United Kingdom</option>
-      <option value="United States">United States</option>
-    </select>
-    
-    <div class="clearfix" ><br>
-      <input type="submit" name='submit' value="Sign Up" style="height:45px;">
-    </div>
-  </div>
-</form>
-<div style="position:absolute;top:870px;left:590px;">
-<?php
-  if(isset($_POST['submit'])){
-    $email = $_POST['email'];
-    $mobile = $_POST['tel'];
-    $username = $_POST['username'];
-    $country = $_POST['country'];
-    $password = $_POST['psw'];
-    $retype = $_POST['psw-repeat'];
-    $sql = "Select * from users where username='".$username."';";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-      echo "<h3 style='color:red'>Username already exists</h3>";
-    }
-    else{
-      if($password == $retype){
-        $password = hash('sha512',$password);
-        $sql = "INSERT INTO `users`(`username`, `email`, `password`, `mobile`, `country`) VALUES ('$username','$email','$password','$mobile','$country');";
-        
-        if ($conn->query($sql) == TRUE or die(mysqli_error($conn))) {
-          echo "<h3>Registration Successful!!</h3>";
-        } 
-        else{
-          echo "<h3 style='color:red'>Registration failed</h3>";
-        }
-      }
-      else{
-        echo "<h3 style='color:red'>Registration failed</h3>";
-      }
-    }
-  }
-?>
-</div>
-</main>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <?php include 'footer.php' ?>
-        <!--<embed type="text/html" src="footer.html" style="width:100%;height:340px">-->
-        <script>
-          if ($('#clrfx').length > 0){
+            <br><br>
+            
+            
+            
+            
+            
+            <?php include 'footer.php' ?>
+    <!--<embed type="text/html" src="footer.html" style="width:100%;height:340px">-->
+    <script>
+        if ($('#clrfx').length > 0){
           (function(){
             $(document).click(function() {
                 var $item = $(".shopping-cart");
@@ -226,8 +222,9 @@
 
             
             })();
-          }
+        }
       </script>
       
+
     </body>
 </html>

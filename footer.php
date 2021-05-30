@@ -31,7 +31,7 @@
                     <div class="footer-address">
                         <span>Address :
                             Tiruvalam Rd, Katpadi, Vellore, Tamil Nadu 632014</span><br><br>
-                        <span>Phone : +8880 44338899</span><br><br>
+                        <span>Phone : +918888888888</span><br><br>
                         <span>Email : support@sos.com</span>
                     </div>
                 </div>
