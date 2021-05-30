@@ -30,7 +30,7 @@
                 if ( isset( $_POST['login'] ) ){
                     $username = $_POST['username'];
                     session_start();
-                    $_SESSION['user']=$username;
+                    $_SESSION['admin']=$username;
                     $pass = $_POST['password'];
                     
                     $result=mysqli_query($conn,"SELECT * FROM admin WHERE Username='$username'") or die("Failed to query database".mysqli_error($conn));

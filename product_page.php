@@ -95,7 +95,9 @@
             
             <a href="#" id="cart" style="width:300px;"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><?php echo $_SESSION['quan'] ?></span></a> 
             <?php 
-            echo "<div id='ids' style='display:none' >".$_GET['query']."</div>";
+            if(isset($_GET['query'])){
+                echo "<div id='ids' style='display:none' >".$_GET['query']."</div>";
+            }
             if(isset($_SESSION['user'])){
                 echo "<div class='dropdown'>";
                 echo "<button id='dLabel' type='button' data-toggle='dropdown' aria-haspopup='true' onclick='myFunction()' aria-expanded='false' style='margin-right:90px;width:150px;'>".$_SESSION['user']."</button>";
@@ -168,9 +170,37 @@
             if(isset($_GET['query'])){
                 echo $_GET['query'];
             } 
+            else if(isset($_GET['search'])){
+                echo $_GET['search'];
+            }
         ?>
 
         </h2></center>
+        <div class="center">
+        <div class="row" >
+        <?php
+        if(isset($_GET['search'])){
+            $sql = "SELECT * from product where `Product_Name` REGEXP '[.]*".$_GET['search']."[.]*' or `Category` REGEXP '[.]*".$_GET['search']."[.]*' or `subcategory` REGEXP '[.]*".$_GET['search']."[.]*';";
+            $result1 = $conn->query($sql);
+            if ($result1->num_rows > 0) {
+                while($row = $result1->fetch_assoc()) {
+                    echo "<div class='col-lg-3 col-md-4 col-sm-6'  >";
+                    echo " <a href='product_detail.php?id=".$row['Product_ID']."'><img src=".$row['Image_URL']." alt='prod_img' style='height:300px;width:100%' ></a>";
+                    echo "<div style='text-align:center' class='pro_name'>".$row['Product_Name']."</div>";
+                    echo "<div style='text-align:center' class='price'>₹".$row['Price']."</div>";
+                    echo "</div>";
+                }
+            }
+            else{
+                echo "<center><br><br><h2>No products found :(</h2></center>";
+            }
+            echo "</div>";        
+
+        }
+
+        else{
+        ?>
+
         <div class="center">
             
                 <div class="dual-range" data-min="0" data-max="5000" style="margin-left:350px;z-index:1;">
@@ -189,7 +219,12 @@
                 
                 <option disabled selected value>Select Sub Category</option>
                 <?php 
-                    $sql1= "SELECT DISTINCT `subcategory` from product";
+                    if($_GET['query']=='All'){
+                        $sql1= "SELECT DISTINCT `subcategory` from product";
+                    }
+                    else{
+                        $sql1= "SELECT DISTINCT `subcategory` from product where `category`='".$_GET['query']."';";
+                    }
                     $result1 = $conn->query($sql1);
                     if ($result1->num_rows > 0) {
                         while($row1 = $result1->fetch_assoc()){
@@ -227,7 +262,7 @@
                 }
                 else{
                     $sql = "SELECT * FROM product where `Price` BETWEEN ".$_GET['min']." AND ".$_GET['max'].";";
-                    $result = $conn->query($sql);
+                    $result = $conn->query($sql) or die(mysqli_error($conn));
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
                         echo "<div class='col-lg-3 col-md-4 col-sm-6'>";
@@ -242,8 +277,8 @@
             
             else{
                 if(isset($_GET['sub'])){
-                    $sql = "SELECT * FROM product where `subcategory`='".$_GET['sub']."' and `Category`='".$_GET['query']."' and `Price` BETWEEN ".$_GET['min']."AND ".$_GET['max'].";";
-                    $result = $conn->query($sql);
+                    $sql = "SELECT * FROM product where `subcategory`='".$_GET['sub']."' and `category`='".$_GET['query']."' and `Price` BETWEEN ".$_GET['min']." AND ".$_GET['max'].";";
+                    $result = $conn->query($sql) or die(mysqli_error($conn));
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
                         echo "<div class='col-lg-3 col-md-4 col-sm-6'>";
@@ -255,8 +290,8 @@
                     } 
                 }
                 else{
-                    $sql = "SELECT * FROM product where `Category`='".$_GET['query']."'and `Price` BETWEEN ".$_GET['min']." AND ".$_GET['max'].";";
-                    $result = $conn->query($sql);
+                    $sql = "SELECT * FROM product where `category`='".$_GET['query']."'and `Price` BETWEEN ".$_GET['min']." AND ".$_GET['max'].";";
+                    $result = $conn->query($sql) or die(mysqli_error($conn));
         
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -273,6 +308,9 @@
             ?>
         </div>
     </center>
+    <?php
+        }
+    ?>
     <br><br><br><br>
     <?php include 'footer.php' ?>
     <!--<embed type="text/html" src="footer.html" style="width:100%;height:340px">-->

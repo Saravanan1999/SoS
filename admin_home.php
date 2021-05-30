@@ -2,7 +2,16 @@
 <html lang="en">
     <?php
         session_start();
-        $user=$_SESSION['user'];
+        if(isset($_GET['logout'])){
+            session_destroy();
+            header("Location: admin_login.php");
+        }
+        if(isset($_SESSION['admin'])){
+            $user=$_SESSION['admin'];
+        }
+        else{
+            header("Location: admin_login.php");
+        }
     ?>
     <head>
         <title>Admin</title>
@@ -13,7 +22,7 @@
         <div class="topnav">
             <div class="ab"> Admin</div>
             <div class="ab">Welcome <?php echo $user?> </div>
-            <div class="a">Log Out</div>
+            <div class="a" onclick="logout()" style="cursor:pointer"> Log Out</div>
         </div>
         <div class="manage">
             <h2>&emsp;&emsp;Manage Users</h2>
@@ -45,5 +54,10 @@
                 </ul>
             </div>
         </div>
+        <script>
+            function logout(){
+                window.location.href="admin_home.php?logout=yes";
+            }
+        </script>
     </body>
 </html>
