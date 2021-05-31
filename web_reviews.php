@@ -20,11 +20,18 @@
                 background-color:black;
                 color:white;
             }
-            
+            a{
+                text-decoration:none;
+                color:white;
+            }
+            a:hover{
+                color:orange;
+            }
         </style>
     </head>
     <body>
     <div class="topnav">
+            <div class="ab"><a  href="admin_home.php"> Admin</a></div>
             <div class="ab">Hello <?php echo $user?> </div>
             <div class="a">Log Out</div>
         </div>
@@ -66,7 +73,7 @@
         ?>
     </div>
 <br><br>
-    <a style="padding-left:30px;" href="admin_home.php">Go Back</a>
+    <a style="padding-left:30px;color:blue;text-decoration:underline" href="admin_home.php">Go Back</a>
     </center>
     </body>
 </html>

@@ -6,6 +6,7 @@
             session_destroy();
             header("Location: admin_login.php");
         }
+        
         if(isset($_SESSION['admin'])){
             $user=$_SESSION['admin'];
         }
@@ -66,7 +67,7 @@
             <img src="assets/images/product.jpg" alt="manage product"/><br><br>
             <div class="text">
                 <ul style="padding-right:90px;">
-                    <li><a href="product.php">View and Manage Products</a></li><br>
+                    <li><a href="manageproducts.php">View and Manage Products</a></li><br>
                     <li><a href="add_product.php">Add Products</a></li><br>
                 </ul>
             </div>

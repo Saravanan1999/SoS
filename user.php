@@ -21,12 +21,24 @@
                 background-color:black;
                 color:white;
             }
+            i{
+                cursor: pointer;
+            }
+            a{
+                text-decoration:none;
+                color:white;
+            }
+            a:hover{
+                color:orange;
+            }
+            
         </style>
     </head>
     <body>
     <div class="topnav">
+            <div class="ab"><a  href="admin_home.php"> Admin</a></div>
             <div class="ab">Welcome <?php echo $user?> </div>
-            <div class="a">Log Out</div>
+            <div class="a" onclick="logout()" style="cursor:pointer">Log Out</div>
         </div>
         <center><h1 style="padding-top:50px;">List of Users using <em>"Shades of Spade"<em></h1>
         <br><br><br>
@@ -64,7 +76,12 @@
                     
             }
         ?>
-            <a style="padding-left:30px;" href="admin_home.php">Go Back</a>
+            <a style="padding-left:30px;color:blue;text-decoration:underline" href="admin_home.php">Go Back</a>
             </center>
+        <script>
+            function logout(){
+                window.location.href="admin_home.php?logout=yes";
+            }
+        </script>
         </body>
 </html>

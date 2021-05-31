@@ -312,6 +312,7 @@
         }
     ?>
     <br><br><br><br>
+    </div>
     <?php include 'footer.php' ?>
     <!--<embed type="text/html" src="footer.html" style="width:100%;height:340px">-->
     <script>

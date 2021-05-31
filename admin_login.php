@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
-  <?php include 'db_conn.php'?>
+  <?php 
+    include 'db_conn.php';
+    if(isset($_SESSION['admin'])){
+      header("Location:admin_home.php");
+    }
+  ?>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin</title>
@@ -11,17 +17,41 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/style/admin_login.css" />
+    <style>
+      h3{
+        margin-left:170px;
+      }
+      form{
+        margin-top:100px;
+        position:relative;
+        left:-135px;
+        
+      }
+      button{
+        margin-right:200px;
+        background: linear-gradient(
+          to right bottom,
+          rgba(255, 255, 255, 0.7),
+          rgba(255, 255, 255, 0.3)
+        );
+        border: none;
+        width: 200px;
+        padding: 0.5rem;
+        border-radius: 2rem;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
     <main>
       <section class="glass">
           <h3>Admin Login</h3>
           
-          <form action="#" method="post">
+          <form action="#" method="post" >
               <label>Username</label><br>
-              <input type="text" name="username"><br><br>
+              <input type="text" name="username" required><br><br>
               <label>Password</label><br>
-              <input type="text" name="password"><br><br>
+              <input type="text" name="password" required><br><br>
               <button name="login" value="Log in">Log In</button>
 
           </form>
