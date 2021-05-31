@@ -23,7 +23,7 @@
     </head>
     <body>
         <div class="topnav">
-            <div class="ab"><a  href="admin_home.php"> Admin</a></div>
+            <div class="ab" ><a  href="admin_home.php"> Admin</a></div>
             <div class="ab">Welcome <?php echo $user?> </div>
             <div class="a" onclick="logout()" style="cursor:pointer"> Log Out</div>
         </div>

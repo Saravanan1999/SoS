@@ -58,6 +58,7 @@
             <div class="text">
                 <ul>
                     <li style="padding-right:140px;padding-top:20px;"><a href="user.php">View and Manage Users</a></li><br>
+                    <li style="padding-right:140px;"><a href="view_orders.php">View orders</a></li><br>
                     <!-- <li><a href="manage_admin.php">View and Manage Admins</a></li><br> -->
                 </ul>
             </div>
