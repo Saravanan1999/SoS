@@ -17,7 +17,7 @@
     <head>
         <meta charset="utf-8">
         
-        <title>Tools</title>
+        <title>SoS</title>
         <link rel="stylesheet" href="assets/style/product.css">
         <script src='assets/js/prod.js'></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>

@@ -2,6 +2,7 @@
     <head>
     <?php 
         include 'db_conn.php';
+        include 'mails.php';
         session_start();
         
         if(!isset($_SESSION['total'])){
@@ -12,6 +13,7 @@
             session_destroy();
             header("location: index.php");
         }
+        $row=array();
     ?>
         <link rel="stylesheet" type="text/css" href="assets/style/login.css"> 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -40,46 +42,25 @@
                 color:black;
                 text-decoration:none;
             }
+            
         </style>
     </head>
     <body>
-    <?php
-        if(isset($_POST['submit'])){
-            $username = $_POST['uname'];
-            $password = $_POST['psw'];
-            $password = hash('sha512',$password);
-            $sql = "Select * from users where username='".$username."';";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                if($row['password']===$password){
-                    $_SESSION['user']=$username;
-                    echo "<h3 style='position:relative;top:550px;left:640px'>Login Successful</h3><br>";
-                }
-                else{
-                    echo "<h3 style='color:red;position:relative;top:550px;left:640px'>Wrong Password</h3><br>";
-                }
-            }
-            else{
-                echo "<h3 style='color:red;position:relative;top:550px;left:590px'>Username does not exist</h3><br>";
-            }
-            header("location: index.php");
-        }
-    ?>
+  
         <div class="cover">
             
         </div>
         <nav>
         
-          <a href="index.php" ><img src="assets/images/logo.jpg" style="height:80px;width:140px"></a>
+          <a href="index.php" style='padding-right:20px;'><img src="assets/images/logo.jpg" style="height:80px;width:140px"></a>
             <input type="search" placeholder="Enter product"><button type="submit"><i class="fa fa-search"></i></button>
-            <a href="index.php">Home</a>
-            <a href="index.php#about">About</a>
-            <a href="product_page.php?query=All&min=0&max=5000">Products</a>
-            <a href="contact.php">Contact</a>
+            <a href="index.php" style="padding-left:30px;">Home</a>
+            <a href="index.php#about" style="padding-left:30px;">About</a>
+            <a href="product_page.php?query=All&min=0&max=5000" style="padding-left:30px;">Products</a>
+            <a href="contact.php" style="padding-left:30px;">Contact</a>
             
             
-            <a href="#" id="cart" style="width:300px;"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><?php echo $_SESSION['quan'] ?></span></a> 
+            <a href="#" id="cart" style="width:300px;padding-left:30px;"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><?php echo $_SESSION['quan'] ?></span></a> 
             <?php 
             if(isset($_SESSION['user'])){
                 echo "<div class='dropdown'>";
@@ -116,6 +97,7 @@
 
                 <ul class="shopping-cart-items" style="max-height:300px;overflow-y:scroll">
                 <?php 
+                
                     $arr = $_SESSION['name'];
                     for($i=0;$i<count($arr);$i++){
                         $url = $_SESSION['url'][$i];
@@ -139,27 +121,100 @@
             </div> <!--end shopping-cart -->
         </div>
   <main>
-  <form  action="" method="post">
+  <form  action="#" method="post">
     
     <div class="logincontainer">
         <h1>Log In</h1>
     
     <hr>
-        <label for="uname"><b>Username</b></label><br>
-        <input type="text" placeholder="Enter Username" name="uname" required><br>
-        <label for="psw"><b>Password</b></label><br>
-        <input type="password" placeholder="Enter Password" name="psw" required><br>
-        <input type="submit" name='submit'value="Log In"><br><br>
+    <?php
+        $fourRandomDigit =-1;
+        if(isset($_POST['otpsubmit'])){
+            $otp = $_POST['otp'];
+            $password = $_POST['password'];
+            $repas = $_POST['retype'];
+            echo "Hello";
+            if($password==$repas){
+                $password = hash('sha512',$password);
+                $sql = "UPDATE users set `password`='".$password."' where `username`='".$_SESSION['uss']."';";
+                if ($conn->query($sql) == TRUE or die(mysqli_error($conn))) {
+                    echo "<script>alert('Sucessfully set new password')</script>";
+                    
+                    header("Location: login.php");
+                
+                } 
+                else{
+                    echo "<label for'otp'>Enter OTP received through your email</label>";
+                    echo "<input type='text' name='otp' placeholder='Enter OTP' ><br>";
+                    echo "<label for'otp'>Enter new password</label><br>";
+                    echo "<input type='password' name='password' placeholder='Enter Password' ><br>";
+                    echo "<label for'otp'>Re-type new password</label><br>";
+                    echo "<input type='password' name='retype' placeholder='Retype password' >";
+                    echo " <input type='submit' name='otpsubmit'value='Submit'><br><br>";
+                    echo "<h3 style='color:red'>Registration failed</h3>";
+                }
+            }
+            else{
+                echo "<label for'otp'>Enter OTP received through your email</label>";
+                echo "<input type='text' name='otp' placeholder='Enter OTP' ><br>";
+                echo "<label for'otp'>Enter new password</label><br>";
+                echo "<input type='password' name='password' placeholder='Enter Password' ><br>";
+                echo "<label for'otp'>Re-type new password</label><br>";
+                echo "<input type='password' name='retype' placeholder='Retype password' >";
+                echo " <input type='submit' name='otpsubmit'value='Submit'><br><br>";
+                echo "<h3>Password and Retyped password is different</h3>";
+            }
+            
+        }  
+        
+        else if(isset($_POST['submit'])){
+            $username = $_POST['uname'];
+           
+            $sql = "Select * from  `users` where `username`='".$username."';";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $fourRandomDigit = mt_rand(100000,999999);
+                $_SESSION['uss']=$_POST['uname'];
+                smtpmailer($row['email'],"hsaravanan29@gmail.com","Shades of Spade","OTP-Forgot Password","Your OTP is ".$fourRandomDigit.".");
+                    
+                echo "<label for'otp'>Enter OTP received through your email</label>";
+                echo "<input type='text' name='otp' placeholder='Enter OTP' ><br>";
+                echo "<label for'otp'>Enter new password</label><br>";
+                echo "<input type='password' name='password' placeholder='Enter Password' ><br>";
+                echo "<label for'otp'>Re-type new password</label><br>";
+                echo "<input type='password' name='retype' placeholder='Retype password' >";
+                echo " <input type='submit' name='otpsubmit'value='Submit'><br><br>";
+                
+            }
+            else{
+                echo " <label for='uname'><b>Username</b></label><br>";
+                echo " <input type='text' placeholder='Enter Username' name='uname' required><br>";
+                echo " <input type='submit' name='submit' value='Reset password'><br><br>";
+                echo "<h3>Username does not exist</h3>";
+            }
+            
+
+        }
+        else{
+           echo " <label for='uname'><b>Username</b></label><br>";
+           echo " <input type='text' placeholder='Enter Username' name='uname' required><br>";
+           echo " <input type='submit' name='submit' value='Reset password'><br><br>";
+    
+        }
+
+        
+        
+        
+    ?>
         <!--<label class="psw">Forgot <a href="forgotpassword.html">password?</a></label><br>-->
-        <label>Don't have an account? <a href="signup.php">Register</a></label><br>
-        <label><a href="forgotpassword.php">Forgot Password</a></label>
-        <br><br><br>
+        <label >Remember the password? <a href="login.php">Login</a></label><br><br><br><br><br><br>
             
     
     </div>
  
     </form>
-    <div >
+    <div style='margin-bottom:100px;'>
     
     </div><br>
 </main>
