@@ -11,7 +11,7 @@
             $user=$_SESSION['admin'];
         }
         else{
-            header("Location: admin_login.php");
+           header("Location: admin_login.php");
         }
     ?>
     <head>
@@ -28,7 +28,7 @@
             }
             ul li::before {
             content: counter(steps);
-            margin-right: 0.5rem;
+            margin-right: 0.2rem;
             background: #ff6f00;
             color: white;
             width: 1.2em;
@@ -44,8 +44,8 @@
         </style>
     </head>
     <body>
-        <div class="topnav">
-            <div class="ab"> Admin</div>
+        <div class="topnav" >
+            <div class="ab" style='margin-right:980px;'> Admin</div>
             <div class="ab">Welcome <?php echo $user?> </div>
             <div class="a" onclick="logout()" style="cursor:pointer"> Log Out</div>
         </div>

@@ -124,7 +124,7 @@
   <form  action="#" method="post">
     
     <div class="logincontainer">
-        <h1>Log In</h1>
+        <h1>Forgot Password</h1>
     
     <hr>
     <?php

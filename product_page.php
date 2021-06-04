@@ -100,7 +100,7 @@
             }
             if(isset($_SESSION['user'])){
                 echo "<div class='dropdown'>";
-                echo "<button id='dLabel' type='button' data-toggle='dropdown' aria-haspopup='true' onclick='myFunction()' aria-expanded='false' style='margin-right:90px;width:150px;'>".$_SESSION['user']."</button>";
+                echo "<button id='dLabel' type='button' data-toggle='dropdown' aria-haspopup='true' onclick='myFunction()' aria-expanded='false' style='margin-right:90px;width:150px;height:35px;font-size:inherit;font-weight:inherit'>".$_SESSION['user']."</button>";
                 echo "<div class='dropdown-menu' id='myDropdown' aria-labelledby='dLabel' style='width:200px;text-align:center'>";
                 echo "<a href='#' style='display:none'></a>";
                 echo "<a class='abc' href='orderview.php' style='font-size:15px;width:200px;text-align:center;;overflow:hidden;padding:0px;'>View Orders</a><hr>";
@@ -163,7 +163,7 @@
             <a href="?query=Fertilizers&min=0&max=5000">Fertilizers</a>
             <a href="?query=Pesticides&min=0&max=5000">Pesticides</a>
             <a href="?query=Machinery and Tools&min=0&max=5000">Machinery & Tools</a>
-            <a href="?query=Others&min=0&max=5000">Others</a>
+            
         </div>
         <center><h2 style="padding-top: 100px;">
         <?php 
@@ -381,8 +381,6 @@
             })();
         }
       </script>
-      
-        
-        
+
     </body>
 </html>

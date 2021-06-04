@@ -175,8 +175,11 @@
                         <div class="title">
                             <div class="row">
                                 <div class="col">
-                                    <h4><b>Order Id:<?php echo $row0['Orderid']?></b></h4>
+                                    <h4><b>Order Id:<?php echo $row0['Orderid']." from ".$row0['Username'] ?></b></h4>
+                                    
                                 </div>  
+                                
+                                
                             <?php 
                                 if ($result1->num_rows > 0) {
                                     
@@ -189,9 +192,10 @@
                                         
                                         echo "<div class='row border-top border-bottom'  style='height:200px' id='rowbr'>";
                                         echo "<div class='row main align-items-center'>";
+                                       
                                         echo "<div class='col-2'><img class='img-fluid' src='".$row2['Image_URL']."' style='height:50px;width:auto;';></div>";
                                         echo "<div class='col'>";
-                                        //echo "<div class='row text-muted'>".$_SESSION['name'][$i]."</div>";
+                                        //echo "<div class='row text-muted'>".$row0['Username']."</div>";
                                         echo "<div class='row'>".$row2['Product_Name']."</div>";
                                         echo "</div>";
                                         echo "<div class='col'><div class='border'>".$row1['quantity']."</div> </div>";
@@ -215,26 +219,60 @@
                                 </div>
                                 <hr>
                                 <div class="row">
-                                    <div class="col" style="padding-left:0;">Items <?php echo $quant; ?></div>
-                                    <div class="col text-right">&#8377;<?php echo $row0['total']-$row0['Shippingcost'] ?></div>
+                                    <div class="col" style="padding-left:7px;margin-left:0;">Items <?php echo $quant; ?></div>
+                                    <div class="col text-right" style='padding-left:8px;'>&#8377;<?php echo $row0['total']-$row0['Shippingcost'] ?></div>
+                                </div><br>
+                                <div class='row'>
+                                <div class='col'><b><u>SHIPPING</u></b></div>
                                 </div>
-                                <p>SHIPPING</p>
+                                <div class='row'>
                                 <?php 
                                     if($row0['Shippingcost']=="50"){
-                                        echo "<div class='col'>Standard-Delivery&emsp;&#8377;50</div><br>";
+                                        echo "<div class='col'>Standard-Delivery</div>";
+                                        echo "<div class='col text-right'>&#8377;50</div><br>";
                                     }
                                     else{
-                                       echo "<div class='col' style='padding-left:20px;padding-left:20px;' >Express-Delivery &#8377;100</div><br>";
+                                       echo "<div class='col'>Express-Delivery</div>";
+                                       echo "<div class='col text-right'>&#8377;100</div><br>";
                                     }
                                     
                                  ?>   
                                 
-                                
+                                </div><br>
                                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                                 <div class="col">TOTAL PRICE</div>
                                
                                 <div class="col text-right" id="tot">&#8377;<?php echo $row0['total']?></div>   
-                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                    <div class='col'>Username:</div>
+                                    <div class='col text-right'><?php echo $row0['Username'] ?> </div>
+                            </div><br>
+                            <div class="row">
+                                    <div class='col'>Name:</div>
+                                    <div class='col text-right'><?php echo $row0['name'] ?> </div>
+                            </div><br>
+                            <div class="row">
+                                    <div class='col'>Address:</div>
+                                    <div class='col text-right'><?php echo $row0['Address'] ?> </div>
+                            </div><br>
+                            <div class="row">
+                                    <div class='col'>City:</div>
+                                    <div class='col text-right'><?php echo $row0['City'] ?> </div>
+                            </div><br>
+                            <div class="row">
+                                    <div class='col'>State:</div>
+                                    <div class='col text-right'><?php echo $row0['State'] ?> </div>
+                            </div><br>
+                            <div class="row">
+                                    <div class='col'>Country:</div>
+                                    <div class='col text-right'><?php echo $row0['Country'] ?> </div>
+                            </div><br>
+                            <div class="row">
+                                    <div class='col'>Contact:</div>
+                                    <div class='col text-right'><?php echo $row0['Phone'] ?> </div>
+                            </div>
         </div>
                                 </div>
                                 </div>

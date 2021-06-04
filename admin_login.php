@@ -18,17 +18,15 @@
     />
     <link rel="stylesheet" href="assets/style/admin_login.css" />
     <style>
-      h3{
-        margin-left:170px;
-      }
+      
       form{
         margin-top:100px;
         position:relative;
-        left:-135px;
+        left:-140px;
         
       }
       button{
-        margin-right:200px;
+        margin-right:220px;
         background: linear-gradient(
           to right bottom,
           rgba(255, 255, 255, 0.7),
@@ -39,6 +37,15 @@
         padding: 0.5rem;
         border-radius: 2rem;
         cursor: pointer;
+      }
+      label{
+        margin-left:20px;
+      }
+      input{
+        margin-right:50px;
+      }
+      h3{
+        margin-left:160px;
       }
     </style>
   </head>
@@ -51,27 +58,38 @@
               <label>Username</label><br>
               <input type="text" name="username" required><br><br>
               <label>Password</label><br>
-              <input type="text" name="password" required><br><br>
-              <button name="login" value="Log in">Log In</button>
+              <input type="password" name="password" required><br><br>
+              <button name="submit" value="Log in">Log In</button>
 
           </form>
           <div class="label">
             <?php
-                if ( isset( $_POST['login'] ) ){
-                    $username = $_POST['username'];
-                    session_start();
-                    $_SESSION['admin']=$username;
-                    $pass = $_POST['password'];
-                    
-                    $result=mysqli_query($conn,"SELECT * FROM admin WHERE Username='$username'") or die("Failed to query database".mysqli_error($conn));
-                    $row=mysqli_fetch_array($result);
-                    if($row['Password']==$pass){
+              if(isset($_POST['submit'])){
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+                $password = hash('sha512',$password);
+                $sql = "Select * from admin where Username='".$username."';";
+                $result = $conn->query($sql) or die(mysqli_error($conn));
+                session_start();
+                $_SESSION['admin']=$username;
+                echo $_SESSION['admin'];
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    if($row['Password']===$password){
+                        echo "Correct Password";
+                        
                         header('Location: admin_home.php');
                     }
                     else{
-                        echo "Wrong username or password";
+                      echo "Wrong Password";
                     }
                 }
+                else{
+                  echo "Wrong username";
+                }
+                
+            }
+            
             ?>
             </div>
       </section>

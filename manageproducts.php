@@ -105,8 +105,8 @@
         </style>
     </head>
     <body>
-        <div class="topnav">
-            <div class="ab"><a  href="admin_home.php"> Admin</a></div>
+        <div class="topnav" >
+            <div class="ab" style='margin-right:1100px;'><a  href="admin_home.php"> Admin</a></div>
             
             <div class="ab">Welcome <?php echo $user?> </div>
             

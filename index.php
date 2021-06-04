@@ -145,10 +145,10 @@
         <div class="about">
             <div class="des"><br><br>
             <h2>About Shades of spade</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                <p>Shades of Spade is an E-commerce website, which is a platform of sales of all farming equipment and cultivation products a farmer will ever need. It is specifically designed to help customers purchase equipment, fertilizers, seeds, crops, etc. whichever materialistic entity is concerned with the nature of farming, be purchased from one single place.</p>
             </div>
             <div class="imag">
-                <img src="assets/images/about.jpg" style="height:350px;padding:50px;">
+                <img src="assets/images/about.jpg" style="height:450px;padding:50px;">
             </div>
         </div>
         <?php
@@ -176,6 +176,7 @@
                 
                 <div class="col-10">
                     <!--Start carousel-->
+                    
                     <div id="carouselExampleIndicators" class="carousel slide" >
 
                         <div class="carousel-inner">
@@ -276,6 +277,7 @@
             }
         }
         function next(){
+            
             var carousel = document.querySelectorAll(".carousel-item");
             var active = document.querySelector(".carousel-item.active");
             

@@ -20,7 +20,7 @@
 
                 <div class="col-lg-4 col-sm-6 mb-2 mb-xl-0 single-footer-widget">
                     <h4>About Us</h4><br>
-                    <span>consectetur adipiscing elit, sed do</span>
+                    <span>Shades of Spade, an E-commerce website, for sale of farming equipment and cultivation products a farmer will ever need. Specifically designed to help customers purchase equipment, fertilizers, seeds and crops.</span>
                     <div class="footer-logo">
                        <!-- <img src="/static/img/img.png" alt="">-->
                     </div>
