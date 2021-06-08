@@ -53,7 +53,7 @@
         <nav>
         
           <a href="index.php" style='padding-right:20px;'><img src="assets/images/logo.jpg" style="height:80px;width:140px"></a>
-            <input type="search" placeholder="Enter product"><button type="submit"><i class="fa fa-search"></i></button>
+            <input type="search" placeholder="Enter product" id='search'><button type="submit"  onclick="search()"><i class="fa fa-search"></i></button>
             <a href="index.php" style="padding-left:30px;">Home</a>
             <a href="index.php#about" style="padding-left:30px;">About</a>
             <a href="product_page.php?query=All&min=0&max=5000" style="padding-left:30px;">Products</a>
@@ -221,6 +221,10 @@
     <?php include 'footer.php' ?>
     <!--<embed type="text/html" src="footer.html" style="width:100%;height:340px">-->
     <script>
+        function search(){
+            var key = document.getElementById("search").value;
+            window.location.href="product_page.php?search="+key;
+        }
         if ($('#clrfx').length > 0){
           (function(){
             $(document).click(function() {

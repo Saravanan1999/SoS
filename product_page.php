@@ -87,7 +87,7 @@
         <nav>
             
             <a href="index.php" ><img src="assets/images/logo.jpg" style="height:80px;width:140px;"></a>
-            <input type="search" placeholder="Enter product"><button type="submit" class='search'><i class="fa fa-search"></i></button> 
+            <input type="search" placeholder="Enter product" id='search'><button type="submit" class='search' onclick='search()'><i class="fa fa-search"></i></button> 
             <a href="index.php">Home</a>
             <a href="index.php#about">About</a>
             <a href="product_page.php?query=All&min=0&max=5000"><u>Products</u></a>
@@ -316,6 +316,10 @@
     <?php include 'footer.php' ?>
     <!--<embed type="text/html" src="footer.html" style="width:100%;height:340px">-->
     <script>
+        function search(){
+            var key = document.getElementById("search").value;
+            window.location.href="product_page.php?search="+key;
+        }
         function filter(){
             if ($('#subc').length > 0){
                 var mini = $('#mini').attr('data-value');

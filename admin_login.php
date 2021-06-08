@@ -72,7 +72,7 @@
                 $result = $conn->query($sql) or die(mysqli_error($conn));
                 session_start();
                 $_SESSION['admin']=$username;
-                echo $_SESSION['admin'];
+                
                 if ($result->num_rows > 0) {
                     $row = $result->fetch_assoc();
                     if($row['Password']===$password){

@@ -56,10 +56,10 @@
 <nav>
    
     <a href="index.php" ><img src="assets/images/logo.jpg" style="height:80px;width:140px"></a>
-    <input type="search" placeholder="Enter product"><button type="submit" ><i class="fa fa-search"></i></button>
+    <input type="search" placeholder="Enter product" id='search'><button type="submit"  onclick="search()" ><i class="fa fa-search"></i></button>
     <a href="index.php">Home</a>
     <a href="index.php#about">About</a>
-    <a href="product_page.php?query=All">Products</a>
+    <a href="product_page.php?query=All&min=0&max=5000">Products</a>
     <a href="contact.php">Contact</a>
     
     
@@ -187,23 +187,28 @@
                                 </div>
                                 <hr>
                                 <div class="row">
-                                    <div class="col" style="padding-left:0;">Items <?php echo $quant; ?></div>
+                                    <div class="col" >Items <?php echo $quant; ?></div>
                                     <div class="col text-right">&#8377;<?php echo $row0['total']-$row0['Shippingcost'] ?></div>
                                 </div>
-                                <p>SHIPPING</p>
+                                <div class='row'>
+                                <div class='col'><b><u>SHIPPING</u></b></div>
+                                </div>
+                                <div class='row'>
                                 <?php 
                                     if($row0['Shippingcost']=="50"){
-                                        echo "<div class='col'>Standard-Delivery&emsp;&#8377;50</div><br>";
+                                        echo "<div class='col'>Standard-Delivery</div>";
+                                        echo "<div class='col text-right'>&#8377;50</div><br>";
                                     }
                                     else{
-                                       echo "<div class='col' style='padding-left:20px;padding-left:20px;' >Express-Delivery &#8377;100</div><br>";
+                                        echo "<div class='col'>Express-Delivery</div>";
+                                        echo "<div class='col text-right'>&#8377;100</div><br>";
                                     }
                                     
                                  ?>   
-                                
+                                </div><br>
                                 
                                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                                <div class="col">TOTAL PRICE</div>
+                                <div class="col" style='padding-left:30px;'>TOTAL PRICE</div>
                                
                                 <div class="col text-right" id="tot">&#8377;<?php echo $row0['total']?></div>   
                 </div>
@@ -221,6 +226,10 @@
         <!--<embed type="text/html" src="footer.html" style="width:100%;height:340px">-->
 
         <script>
+        function search(){
+            var key = document.getElementById("search").value;
+            window.location.href="product_page.php?search="+key;
+        }
         function cancel(a){
             window.location.href="orderview.php?orderno="+a;
         }

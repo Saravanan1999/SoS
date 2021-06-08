@@ -229,7 +229,7 @@
     <nav>
            
            <a href="index.php" ><img src="assets/images/logo.jpg" style="height:80px;width:140px;"></a>
-           <input type="search" placeholder="Enter product" ><button type="submit" style='height:35px;'><i class="fa fa-search"></i></button> 
+           <input type="search" placeholder="Enter product" id='search'><button type="submit"  onclick="search()" style='height:35px;'><i class="fa fa-search"></i></button> 
            <a href="index.php">Home</a>
            <a href="index.php#about">About</a>
            <a href="product_page.php?query=All&min=0&max=5000"><u>Products</u></a>
@@ -457,7 +457,9 @@
     </div>
     <?php include 'footer.php' ?>
     <script>
+        
         magnify("myimage", 3);
+        
         const ratingStars = [...document.getElementsByClassName("rating__star")];
         
         function executeRating(stars) {
@@ -483,7 +485,10 @@
             });
         }
         executeRating(ratingStars);
-        
+        function search(){
+            var key = document.getElementById("search").value;
+            window.location.href="product_page.php?search="+key;
+        }
    
         function createCookie(name, value, days) {
             var expires;

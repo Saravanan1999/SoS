@@ -50,11 +50,11 @@
         <nav>
         
             <a href="index.php" ><img src="assets/images/logo.jpg" style="height:80px;width:140px"></a>
-            <input type="search" placeholder="Enter product"><button type="submit"><i class="fa fa-search"></i></button>
+            <input type="search" placeholder="Enter product" id='search'><button type="submit" onclick='search()'><i class="fa fa-search"></i></button>
             <a href="index.php">Home</a>
             <a href="index.php#about">About</a>
             <a href="product_page.php?query=All&min=0&max=5000">Products</a>
-            <a href="contact.php">Contact</a>
+            <a href="contact.php"><u>Contact</u></a>
             
             
             <a href="#" id="cart" style="width:300px;"><i class="fa fa-shopping-cart"></i> Cart <span class="badge"><?php echo $_SESSION['quan'] ?></span></a> 
@@ -191,6 +191,10 @@
             <?php include 'footer.php' ?>
     <!--<embed type="text/html" src="footer.html" style="width:100%;height:340px">-->
     <script>
+        function search(){
+            var key = document.getElementById("search").value;
+            window.location.href="product_page.php?search="+key;
+        }
         if ($('#clrfx').length > 0){
           (function(){
             $(document).click(function() {

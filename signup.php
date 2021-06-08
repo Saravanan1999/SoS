@@ -169,7 +169,7 @@
     $sql = "Select * from users where username='".$username."';";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
-      echo "<h3 style='color:red'>Username already exists</h3>";
+      echo "<h3 style='color:red;margin-top:50px'>Username already exists</h3>";
     }
     else{
       if($password == $retype){
@@ -177,14 +177,14 @@
         $sql = "INSERT INTO `users`(`username`, `email`, `password`, `mobile`, `country`) VALUES ('$username','$email','$password','$mobile','$country');";
         
         if ($conn->query($sql) == TRUE or die(mysqli_error($conn))) {
-          echo "<h3>Registration Successful!!</h3>";
+          echo "<h3 style='margin-top:70px'>Registration Successful!!</h3>";
         } 
         else{
-          echo "<h3 style='color:red'>Registration failed</h3>";
+          echo "<h3 style='color:red' style='margin-top:70px'>Registration failed</h3>";
         }
       }
       else{
-        echo "<h3 style='color:red'>Registration failed</h3>";
+        echo "<h3 style='color:red' style='margin-top:70px'>Registration failed</h3>";
       }
     }
   }
